@@ -55,6 +55,7 @@ function createLogin(win) {
     parent: win,
     modal: true,
     resizable: false,
+    frame: false,
   });
 
   login.loadFile('./pages/login.html');

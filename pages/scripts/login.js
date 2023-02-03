@@ -18,5 +18,5 @@ $(() => {
 });
 
 cancel.on('click', () => {
-    console.log('AAA');
+    ipcRenderer.send('close_window');
 });
