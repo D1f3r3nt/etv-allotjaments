@@ -19,5 +19,8 @@
   "homepage": "https://github.com/D1f3r3nt/etv-allotjaments#readme",
   "devDependencies": {
     "electron": "^22.2.0"
+  },
+  "dependencies": {
+    "jquery": "^3.6.3"
   }
 }
