@@ -1,0 +1,10 @@
+*.exe
+*\node_modules
+*.zip
+*.rar
+*.class
+*\private
+*\build
+*\dist
+*.mp4
+*.mp3

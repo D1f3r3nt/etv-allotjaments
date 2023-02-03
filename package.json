@@ -1,0 +1,23 @@
+{
+  "name": "etv-allotjaments",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D1f3r3nt/etv-allotjaments.git"
+  },
+  "author": "MXC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/D1f3r3nt/etv-allotjaments/issues"
+  },
+  "homepage": "https://github.com/D1f3r3nt/etv-allotjaments#readme",
+  "devDependencies": {
+    "electron": "^22.2.0"
+  }
+}
