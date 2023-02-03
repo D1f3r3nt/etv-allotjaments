@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Menu } = require('electron');
 const { myMenu } = require('./components/menu');
+const ipc = require('./js/ipc');
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -32,3 +33,6 @@ app.on('activate', () => {
         createWindow();
     }
 });
+
+//Messages
+ipc;
