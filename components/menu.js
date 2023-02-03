@@ -1,5 +1,4 @@
-const { Menu, app } = require('electron/main');
-// Esta clase se encarga del menu
+const { Menu, app, BrowserWindow } = require('electron/main');
 
 const isMac = process.platform === 'darwin';
 
@@ -11,49 +10,54 @@ const isMac = process.platform === 'darwin';
  * @returns devuelve el menu ya preparado
  */
 exports.myMenu = function (win) {
-    const template = [
-        // { role: 'appMenu' }
-        ...(isMac ? [{
-          label: app.name,
-          submenu: [
-            { role: 'about' },
-            { type: 'separator' },
-            { role: 'quit' }
-          ]
-        }] : []),
-      
-      
-        // Home Section
+  const template = [
+    ...(isMac ? [{
+      label: app.name,
+      submenu: [
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'quit' }
+      ]
+    }] : []),
+    // Home Section
+    {
+      label: 'Home',
+      submenu: [
         {
           label: 'Home',
-          submenu: [
-            {
-              label: 'Home',
-              click: () => win.loadFile('pages/index.html')
-            }
-          ]
-        },
+          click: () => win.loadFile('./pages/index.html')
+        }
+      ]
+    },
+    {
+      label: 'Login',
+      submenu: [
         {
           label: 'Login',
-          submenu: [
-            {
-              label: 'Login',
-              click: () => console.log('A')            }
-          ]
-        },
-
-        // DEVELOPING MENU
-        // Comentar abans d'entregar
-        {
-          label: 'Developer',
-          submenu: [
-            {
-              role: 'toggleDevTools',
-            }
-          ]
+          click: () => createLogin(win)
         }
-      
-      ];
+      ]
+    },
+  ];
 
-    return Menu.buildFromTemplate(template);
+  return Menu.buildFromTemplate(template);
+}
+
+function createLogin(win) {
+  const login = new BrowserWindow({
+    height: 500,
+    width: 500,
+    webPreferences: {
+      contextIsolation: false, // Para hacer que la ventana no sea unicamente cerrada
+      nodeIntegration: true, //Para usar Node en la pagina
+    },
+    title: 'Login on ETV Allotjaments',
+    parent: win,
+    modal: true,
+    resizable: false,
+  });
+
+  login.loadFile('./pages/login.html');
+
+  return login;
 }
