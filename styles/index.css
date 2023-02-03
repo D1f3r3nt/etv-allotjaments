@@ -11,7 +11,7 @@ div.cards {
     text-align: center;
 }
 
-div.card{
+div.card {
     background-color: #cbdfbd;
     display: inline-block;
     margin: 20px;
@@ -24,17 +24,51 @@ div.card{
     z-index: 1;
 }
 
-img{
+img {
     max-width: 300px;
 }
 
-div.titol{
+a.btn {
+    background-color: #f19c79;
+}
+
+a.info {
+    border-radius: 32px;
+    height: 32px;
+    padding: 0;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    width: 32px;
+    
+}
+
+span{
+    background: white;
+        display: block;
+        height: 2px;
+        position: absolute;
+        top: 16px;
+        transition: all 0.15s 0s ease-out;
+        width: 12px;
+}
+
+span.left {
+    right: 14px;
+    transform: rotate(45deg);
+}
+span.right {
+    left: 14px;
+    transform: rotate(-45deg);  
+}
+
+div.titol {
     padding: 6px 15px 10px;
     position: relative;
     z-index: 0;
 }
 
-h2{
+h2 {
     font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.05em;
@@ -42,7 +76,7 @@ h2{
     padding: 0;
 }
 
-small{
+small {
     display: block;
     font-size: 18px;
     font-weight: 600;
