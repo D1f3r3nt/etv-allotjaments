@@ -35,4 +35,4 @@ app.on('activate', () => {
 });
 
 //Messages
-ipc;
+ipc
