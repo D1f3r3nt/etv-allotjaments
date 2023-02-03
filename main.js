@@ -1,17 +1,22 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
+const { myMenu } = require('./components/menu');
 
 function createWindow() {
     const win = new BrowserWindow({
         height: 600,
         width: 800,
         webPreferences: {
-            nodeIntegration: true,
-            enableRemoteModule: true
+            contextIsolation: false, // Para hacer que la ventana no sea unicamente cerrada
+            nodeIntegration: true, //Para usar Node en la pagina
         },
         title: 'ETV Allotjaments',
     });
 
+    Menu.setApplicationMenu(myMenu(win));
+
     win.loadFile('index.html');
+
+    return win;
 }
 
 app.whenReady().then(createWindow);
