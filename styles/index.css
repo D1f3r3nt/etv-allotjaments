@@ -30,6 +30,30 @@ img {
 
 a.btn {
     background-color: #f19c79;
+    border-radius: 4px;
+    box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.25);
+    color: white;
+    display: inline-block;
+    padding: 6px 30px 8px;
+    position: relative;
+    text-decoration: none;
+    transition: all 0.1s 0s ease-out;
+}
+
+.no_touch a.btn:hover {
+    background: #a44a3f;
+    box-shadow: 0px 8px 2px 0 rgba(0, 0, 0, 0.075);
+    transform: translateY(-2px);
+    transition: all 0.25s 0s ease-out;
+}
+
+.no_touch a.btn:active,
+a.btn:active {
+    background: #a44a3f;
+    box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.25);
+    transform: translate3d(0, 1px, 0);
+    transition: all 0.025s 0s ease-out;
+
 }
 
 a.info {
@@ -40,26 +64,27 @@ a.info {
     right: 15px;
     top: 10px;
     width: 32px;
-    
+
 }
 
-span{
+span {
     background: white;
-        display: block;
-        height: 2px;
-        position: absolute;
-        top: 16px;
-        transition: all 0.15s 0s ease-out;
-        width: 12px;
+    display: block;
+    height: 2px;
+    position: absolute;
+    top: 16px;
+    transition: all 0.15s 0s ease-out;
+    width: 12px;
 }
 
 span.left {
     right: 14px;
     transform: rotate(45deg);
 }
+
 span.right {
     left: 14px;
-    transform: rotate(-45deg);  
+    transform: rotate(-45deg);
 }
 
 div.titol {
@@ -81,4 +106,34 @@ small {
     font-size: 18px;
     font-weight: 600;
     letter-spacing: -0.025em;
+}
+
+div.card-description{
+    padding: 0 15px 10px;
+    position: relative;
+    font-size: 14px;
+}
+
+div.card-actions {
+    box-shadow: 0 2px 0px 0 rgba(0,0,0,0.075);
+  padding: 10px 15px 20px;
+  text-align: center;
+}
+
+div.card-flat{
+    background: darken(white,15);
+    position: absolute;
+    width: 100%;
+    transform-origin: top;
+    transform: rotateX(-90deg);
+}
+
+div.flap1{
+    transition: all 0.3s 0.3s ease-out;
+    z-index: -1;
+}
+
+div.flap2{
+    transition: all 0.3s 0s ease-out;
+    z-index: -2;
 }
