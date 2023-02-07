@@ -5,14 +5,6 @@ const { ipcRenderer } = require("electron");
 const cards = $('.cards')
 
 $(() => {
-    /*for (let index = 0; index < 10; index++) {
-        cards.append(CardIndex({
-            image: 'https://source.unsplash.com/300x225/?wave',
-            name: 'Prueba',
-            address: 'Manacor',
-            description: 'Prueba numero 1'
-        }))
-    }*/
 
     ipcRenderer.send('get_allotjaments');
 
@@ -21,7 +13,7 @@ $(() => {
 
         response.map(dato => {
             cards.append(CardIndex({
-                image: 'https://source.unsplash.com/300x225/?wave',
+                image: 'https://loremflickr.com/300/225/house',
                 name: dato.nombre,
                 address: dato.adresa,
                 description: dato.descripcio
