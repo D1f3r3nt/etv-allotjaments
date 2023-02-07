@@ -32,22 +32,50 @@ ipcMain.on('get_allotjaments', (e, args) => {
 ipcMain.on('check_user', (e, args) => {
 
   const { net } = require('electron')
-  const valueRequest = {
-      method: 'GET',
-      protocol: 'http:',
-      hostname: 'etv.dawpaucasesnoves.com/etvServidor/public',
-      // port:'80',
-      path: '/api/login'
-  }
-  const request = net.request(valueRequest);
+
+  //Variables
+  var body = JSON.stringify(args);
+  var statusCode
+  // var result
+
+  // Request
+  const request = net.request({
+    method: 'POST',
+    protocol: 'http:',
+    hostname: 'etv.dawpaucasesnoves.com/etvServidor/public',
+    // port:'80',
+    path: '/api/login',
+  });
+
   request.on('response', (response) => {
+    // console.log(`STATUS: ${response.statusCode}`);
+    // console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
+    statusCode = response.statusCode
 
-          // 
-          e.sender.send('check_user', response)
+    if (statusCode == 200) {
+      response.on('data', (chunk) => {
+        responseData = JSON.parse(chunk);
 
-  })
-  request.end()
-  
+        result = JSON.parse('{' +
+          '"status" : "' + statusCode + '",' +
+          '"data": {' +
+            '"nom" : "' + responseData.data.usuari.nom + '",' +
+            '"token" : "' + responseData.data.token + '"' +
+            '}' +
+          '}')
+      });
+    } else {
+      result = JSON.parse('{ "status" : "' + statusCode + '"}');
+    }
+
+    console.log(result);
+    e.sender.send('post_login', result)
+
+  });
+
+  request.setHeader('Content-Type', 'application/json');
+  request.write(body, 'utf-8');
+  request.end();
 })
 
 //console.log("EXTRACT IPC WORKS");
