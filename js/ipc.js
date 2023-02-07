@@ -31,8 +31,6 @@ ipcMain.on('get_allotjaments', (e, args) => {
 // POST Login
 ipcMain.on('check_user', (e, args) => {
 
-  const { net } = require('electron')
-
   //Variables
   var body = JSON.stringify(args);
   var statusCode
