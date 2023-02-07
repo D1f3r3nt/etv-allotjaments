@@ -13,9 +13,9 @@ ipcMain.on('get_allotjaments', (e, args) => {
   const valueRequest = {
     method: 'GET',
     protocol: 'http:',
-    hostname: 'etv.dawpaucasesnoves.com/etvServidor/public',
+    hostname: 'www.rampacom.com/ProyectoFinal/public',
     // port:'80',
-    path: '/api/allotjaments'
+    path: '/api/alojamiento'
 }
   const request = net.request(valueRequest)
   request.on('response', (response) => {
@@ -39,9 +39,9 @@ ipcMain.on('check_user', (e, args) => {
   const request = net.request({
     method: 'POST',
     protocol: 'http:',
-    hostname: 'etv.dawpaucasesnoves.com/etvServidor/public',
+    hostname: 'www.rampacom.com/ProyectoFinal/public',
     // port:'80',
-    path: '/api/login',
+    path: '/api/log/in',
   });
 
   request.on('response', (response) => {
