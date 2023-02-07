@@ -34,7 +34,6 @@ ipcMain.on('check_user', (e, args) => {
   //Variables
   var body = JSON.stringify(args);
   var statusCode
-  // var result
 
   // Request
   const request = net.request({
@@ -46,29 +45,9 @@ ipcMain.on('check_user', (e, args) => {
   });
 
   request.on('response', (response) => {
-    // console.log(`STATUS: ${response.statusCode}`);
-    // console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
-    statusCode = response.statusCode
-
-    if (statusCode == 200) {
       response.on('data', (chunk) => {
-        responseData = JSON.parse(chunk);
-
-        result = JSON.parse('{' +
-          '"status" : "' + statusCode + '",' +
-          '"data": {' +
-            '"nom" : "' + responseData.data.usuari.nom + '",' +
-            '"token" : "' + responseData.data.token + '"' +
-            '}' +
-          '}')
+        e.sender.send('post_login', JSON.parse(chunk))
       });
-    } else {
-      result = JSON.parse('{ "status" : "' + statusCode + '"}');
-    }
-
-    console.log(result);
-    e.sender.send('post_login', result)
-
   });
 
   request.setHeader('Content-Type', 'application/json');
