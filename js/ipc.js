@@ -9,7 +9,7 @@ ipcMain.on('close_window', (e, args) => {
 })
 
 // GET all Allotjaments
-ipcMain.on('get_allotjaments', (e, args) => {
+ipcMain.on('rest_get_allotjaments', (e, args) => {
   const valueRequest = {
     method: 'GET',
     protocol: 'http:',
@@ -21,7 +21,7 @@ ipcMain.on('get_allotjaments', (e, args) => {
   request.on('response', (response) => {
 
     response.on('data', (chunk) => {
-      e.sender.send('get_allotjaments', JSON.parse(chunk))
+      e.sender.send('rest_get_allotjaments', JSON.parse(chunk))
       //console.log(`BODY: ${chunk}`)
     })
   })
