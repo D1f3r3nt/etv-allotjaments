@@ -3,11 +3,11 @@ let $ = { jquery } = require('jquery');
 exports.CardIndex = function (object) {
     let div_card = $('<div class="card"></div>');
 
-    let div_image = $('<div class="imatge"></div>');
-    let image = $(`<img src="${object.image}" alt="Image not found" />`);
+    let div_image = $('<div class="card__image-holder"></div>');
+    let image = $(`<img class="card__image" src="${object.image}" alt="Image not found" />`);
 
-    let div_title = $(`<div class="titol"></div>`)
-    let button_title = $(`<a href="#" class="info btn">
+    let div_title = $(`<div class="card-title"></div>`)
+    let button_title = $(`<a href="#" class="toggle-info btn">
                             <span class="left"></span>
                             <span class="right"></span>
                         </a>`)
