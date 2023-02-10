@@ -24,13 +24,16 @@ ipcMain.on('get_allotjaments', (e, args) => {
   }
 
   const request = net.request(valueRequest)
-  request.on('response', (response) => {
-
-    response.on('data', (chunk) => {
-      e.sender.send('res_get_allotjaments', JSON.parse(chunk))
-      //console.log(`BODY: ${chunk}`)
+  try {
+    request.on('response', (response) => {
+      response.on('data', (chunk) => {
+        e.sender.send('res_get_allotjaments', JSON.parse(chunk))
+        //console.log(`BODY: ${chunk}`)
+      })
     })
-  })
+  } catch (e) {
+    console.log(e);
+  }
   request.setHeader('Content-Type', 'application/json');
   request.end()
 })
