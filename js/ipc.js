@@ -1,5 +1,8 @@
 const { net, ipcMain, BrowserWindow } = require('electron')
 
+//Variable token
+let token;
+
 // Close
 ipcMain.on('close_window', (e, args) => {
 
@@ -47,6 +50,9 @@ ipcMain.on('login', (e, args) => {
   request.on('response', (response) => {
       response.on('data', (chunk) => {
         e.sender.send('res_post_login', JSON.parse(chunk))
+        
+        // Guardar Token
+        token = 'Bearer ' + responseData.data.token;
       });
   });
 
@@ -68,7 +74,7 @@ ipcMain.on('get_municipis', (e, args) => {
     protocol: 'http:',
     hostname: 'www.rampacom.com/ProyectoFinal/public',
     // port:'80',
-    path: '/api/Log/in',
+    path: '/api/municipio',
   });
 
   request.on('response', (response) => {
@@ -79,6 +85,7 @@ ipcMain.on('get_municipis', (e, args) => {
   });
 
   request.setHeader('Content-Type', 'application/json');
+  request.setHeader('Authorization', token);
   request.write(body, 'utf-8');
   request.end();
 })
