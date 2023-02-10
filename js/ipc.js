@@ -17,8 +17,8 @@ ipcMain.on('close_window', (e, args) => {
 ipcMain.on('get_allotjaments', (e, args) => {
   const valueRequest = {
     method: 'GET',
-    protocol: 'http:',
-    hostname: 'etv.dawpaucasesnoves.com/etvServidor/public',
+    protocol: hostApi,
+    hostname: hostProtocol,
     // port:'80',
     path: '/api/allotjaments',
   }
@@ -36,7 +36,9 @@ const request = net.request(valueRequest)
 })
 
 // POST Login
-ipcMain.on('login', (e, args) => {
+ipcMain.on('post_login', (e, args) => {
+
+  console.log(args)
 
   //Variables
   var body = JSON.stringify(args);
@@ -48,7 +50,7 @@ ipcMain.on('login', (e, args) => {
     protocol: hostProtocol,
     hostname: hostApi,
     // port:'80',
-    path: '/api/Log/in',
+    path: '/api/login',
   });
 
   request.on('response', (response) => {
@@ -63,8 +65,6 @@ ipcMain.on('login', (e, args) => {
   request.setHeader('Content-Type', 'application/json');
   request.write(body, 'utf-8');
   request.end();
-
-  token = ''  // buidar Token
 })
 
 // GET Municipis

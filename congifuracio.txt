@@ -1,0 +1,20 @@
+Usuari API (Professor)
+{
+  "nom": "DAM Grup 4",
+  "email": "grup4@dam.com",
+  "password": "grup4",
+  "telefon": "606995544",
+  "dni": "22222222X"
+}
+
+Resposta:
+{
+  "status": "success",
+  "data": {
+    "nom": "DAM Grup 4",
+    "email": "grup4@dam.com",
+    "telefon": "606995544",
+    "dni": "22222222X",
+    "id": 39
+  }
+}
