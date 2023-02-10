@@ -2,6 +2,8 @@ const { net, ipcMain, BrowserWindow } = require('electron')
 
 //Variable token
 let token;
+let hostApi = 'etv.dawpaucasesnoves.com/etvServidor/public'
+let hostProtocol = 'http'
 
 // Close
 ipcMain.on('close_window', (e, args) => {
@@ -16,11 +18,12 @@ ipcMain.on('get_allotjaments', (e, args) => {
   const valueRequest = {
     method: 'GET',
     protocol: 'http:',
-    hostname: 'www.rampacom.com/ProyectoFinal/public',
+    hostname: 'etv.dawpaucasesnoves.com/etvServidor/public',
     // port:'80',
-    path: '/api/alojamiento'
-}
-  const request = net.request(valueRequest)
+    path: '/api/allotjaments',
+  }
+
+const request = net.request(valueRequest)
   request.on('response', (response) => {
 
     response.on('data', (chunk) => {
@@ -28,6 +31,7 @@ ipcMain.on('get_allotjaments', (e, args) => {
       //console.log(`BODY: ${chunk}`)
     })
   })
+  request.setHeader('Content-Type', 'application/json');
   request.end()
 })
 
@@ -41,8 +45,8 @@ ipcMain.on('login', (e, args) => {
   // Request
   const request = net.request({
     method: 'POST',
-    protocol: 'http:',
-    hostname: 'www.rampacom.com/ProyectoFinal/public',
+    protocol: hostProtocol,
+    hostname: hostApi,
     // port:'80',
     path: '/api/Log/in',
   });
@@ -59,6 +63,8 @@ ipcMain.on('login', (e, args) => {
   request.setHeader('Content-Type', 'application/json');
   request.write(body, 'utf-8');
   request.end();
+
+  token = ''  // buidar Token
 })
 
 // GET Municipis
@@ -71,10 +77,10 @@ ipcMain.on('get_municipis', (e, args) => {
   // Request
   const request = net.request({
     method: 'GET',
-    protocol: 'http:',
-    hostname: 'www.rampacom.com/ProyectoFinal/public',
+    protocol: hostProtocol,
+    hostname: hostApi,
     // port:'80',
-    path: '/api/municipio',
+    path: '/api/municipis',
   });
 
   request.on('response', (response) => {
