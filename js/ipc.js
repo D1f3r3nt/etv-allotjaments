@@ -55,4 +55,32 @@ ipcMain.on('login', (e, args) => {
   request.end();
 })
 
+// GET Municipis
+ipcMain.on('get_municipis', (e, args) => {
+
+  //Variables
+  var body = JSON.stringify(args);
+  var statusCode
+
+  // Request
+  const request = net.request({
+    method: 'GET',
+    protocol: 'http:',
+    hostname: 'www.rampacom.com/ProyectoFinal/public',
+    // port:'80',
+    path: '/api/Log/in',
+  });
+
+  request.on('response', (response) => {
+      response.on('data', (chunk) => {
+        e.sender.send('res_post_login', JSON.parse(chunk))
+        console.log(response);
+      });
+  });
+
+  request.setHeader('Content-Type', 'application/json');
+  request.write(body, 'utf-8');
+  request.end();
+})
+
 //console.log("EXTRACT IPC WORKS");

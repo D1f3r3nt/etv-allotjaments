@@ -15,8 +15,8 @@ $(() => {
             cards.append(CardIndex({
                 image: 'https://loremflickr.com/300/225/house',
                 name: dato.nombre,
-                address: dato.adresa,
-                description: dato.descripcio
+                address: dato.direccion,
+                description: dato.descripcion
             }))
         });
     })
