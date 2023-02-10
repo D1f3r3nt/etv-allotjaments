@@ -1,23 +1,17 @@
 let $ = { jquery } = require('jquery');
 
 exports.CardIndex = function (object) {
-    let div_card = $(`<div id="${object.id}" class="card"></div>`);
+    let div_card = $(`<div id="${object.id}" class="card m-3"></div>`);
 
-    let div_info = $('<div class="card__info-hover"></div>');
+    let image = $(`<img src="${object.image}" class="card-img-top" alt="No disponible">`);
 
-    let div_image = $(`<div class="card__img"></div>`);
-    div_image.css('background-image', `url(${object.image})`)
+    let div_body = $('<div class="card-body d-flex flex-column"></div>');
 
-    let button = $(`<a href="#" class="card_link"></a>`);
+    let title = $(`<h5 class="card-title">${object.title}</h5>`);
 
-    let div_image_hover = $('<div class="card__img--hover"></div>')
-    div_image_hover.css('background-image', `url(${object.image})`)
+    let info = $(`<p class="card-text">${object.description}</p>`);
 
-    let info = $(`<div class="card__info"></div>`);
+    let button = $(`<button class="btn btn-primary align-self-center">Ver mas</button>`);
 
-    let category = $(`<span class="card__category">${object.adresa}</span>`)
-    let title = $(`<div class="card-description">${object.description}</div>`)
-    let by = $(`<span class="card__by">by <a href="#" class="card__author" title="author">${object.name}</a></span>`)
-
-    return div_card.append(div_info, div_image, button.append(div_image_hover), info.append(category, title, by))
+    return div_card.append(image, div_body.append(title, info, button));
 }
