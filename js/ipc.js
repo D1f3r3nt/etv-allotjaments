@@ -3,7 +3,7 @@ const { net, ipcMain, BrowserWindow } = require('electron')
 //Variable token
 let token;
 let hostApi = 'etv.dawpaucasesnoves.com/etvServidor/public'
-let hostProtocol = 'http'
+let hostProtocol = 'http:'
 
 // Close
 ipcMain.on('close_window', (e, args) => {
@@ -17,13 +17,13 @@ ipcMain.on('close_window', (e, args) => {
 ipcMain.on('get_allotjaments', (e, args) => {
   const valueRequest = {
     method: 'GET',
-    protocol: hostApi,
-    hostname: hostProtocol,
+    protocol: hostProtocol,
+    hostname: hostApi,
     // port:'80',
     path: '/api/allotjaments',
   }
 
-const request = net.request(valueRequest)
+  const request = net.request(valueRequest)
   request.on('response', (response) => {
 
     response.on('data', (chunk) => {
@@ -54,12 +54,12 @@ ipcMain.on('post_login', (e, args) => {
   });
 
   request.on('response', (response) => {
-      response.on('data', (chunk) => {
-        e.sender.send('res_post_login', JSON.parse(chunk))
-        
-        // Guardar Token
-        token = 'Bearer ' + responseData.data.token;
-      });
+    response.on('data', (chunk) => {
+      e.sender.send('res_post_login', JSON.parse(chunk))
+
+      // Guardar Token
+      token = 'Bearer ' + responseData.data.token;
+    });
   });
 
   request.setHeader('Content-Type', 'application/json');
@@ -84,10 +84,10 @@ ipcMain.on('get_municipis', (e, args) => {
   });
 
   request.on('response', (response) => {
-      response.on('data', (chunk) => {
-        e.sender.send('res_post_login', JSON.parse(chunk))
-        console.log(response);
-      });
+    response.on('data', (chunk) => {
+      e.sender.send('res_post_login', JSON.parse(chunk))
+      console.log(response);
+    });
   });
 
   request.setHeader('Content-Type', 'application/json');

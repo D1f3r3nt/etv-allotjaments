@@ -7,7 +7,7 @@ exports.CardIndex = function (object) {
 
     let div_body = $('<div class="card-body d-flex flex-column"></div>');
 
-    let title = $(`<h5 class="card-title">${object.title}</h5>`);
+    let title = $(`<h5 class="card-title">${object.name}</h5>`);
 
     let info = $(`<p class="card-text">${object.description}</p>`);
 
