@@ -29,7 +29,7 @@ ipcMain.on('get_allotjaments', (e, args) => {
 })
 
 // POST Login
-ipcMain.on('check_user', (e, args) => {
+ipcMain.on('login', (e, args) => {
 
   //Variables
   var body = JSON.stringify(args);
@@ -41,7 +41,7 @@ ipcMain.on('check_user', (e, args) => {
     protocol: 'http:',
     hostname: 'www.rampacom.com/ProyectoFinal/public',
     // port:'80',
-    path: '/api/log/in',
+    path: '/api/Log/in',
   });
 
   request.on('response', (response) => {
