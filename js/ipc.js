@@ -40,6 +40,33 @@ ipcMain.on('get_allotjaments', (e, args) => {
   request.end()
 })
 
+// GET all Fotos
+ipcMain.on('get_fotos', (e, args) => {
+  const valueRequest = {
+    method: 'GET',
+    protocol: hostProtocol,
+    hostname: hostApi,
+    // port:'80',
+    path: '/api/fotos',
+  }
+
+  const request = net.request(valueRequest)
+
+  request.on('response', (response) => {
+    response.on('data', (chunk) => {
+      try {
+        e.sender.send('res_get_fotos', JSON.parse(chunk))
+        //console.log(`BODY: ${chunk}`)
+      } catch (e) {
+        console.log(e);
+      }
+    })
+  })
+
+  request.setHeader('Content-Type', 'application/json');
+  request.end()
+})
+
 // POST Login
 ipcMain.on('post_login', (e, args) => {
 
@@ -64,6 +91,7 @@ ipcMain.on('post_login', (e, args) => {
 
       // Guardar Token
       token = 'Bearer ' + responseData.data.token;
+      // U
     });
   });
 

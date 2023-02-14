@@ -59,6 +59,16 @@ exports.myMenu = function (win) {
         },
       ]
     },
+      // DEVELOPING MENU
+  // Comentar abans d'entregar
+  {
+    label: 'Developer',
+    submenu: [
+      {
+        role: 'toggleDevTools',
+      }
+    ]
+  }
   ];
 
   return Menu.buildFromTemplate(template);
