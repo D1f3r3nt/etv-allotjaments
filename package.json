@@ -21,6 +21,7 @@
     "electron": "^22.2.0"
   },
   "dependencies": {
+    "gridjs": "^6.0.6",
     "jquery": "^3.6.3",
     "jquery-validation": "^1.19.5"
   }

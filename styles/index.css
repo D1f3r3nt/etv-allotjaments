@@ -9,7 +9,7 @@ nav div {
 #filter {
     width: 100%;
     height: 300px;
-    background-color: sandybrown;
+    background-color: rgb(182, 182, 182);
     border-radius: 0 0 8px 8px;
     padding-top: 50px;
 }

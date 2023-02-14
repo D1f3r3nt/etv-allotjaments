@@ -38,6 +38,27 @@ exports.myMenu = function (win) {
         }
       ]
     },
+    {
+      label: 'Administracio',
+      submenu: [
+        {
+          label: 'Allotjaments',
+          click: () => win.loadFile('./pages/admin_allotjament.html')
+        },
+        {
+          label: 'Comentaris',
+          click: () => createLogin(win)
+        },
+        {
+          label: 'Reserves',
+          click: () => createLogin(win)
+        },
+        {
+          label: 'Serveis',
+          click: () => createLogin(win)
+        },
+      ]
+    },
   ];
 
   return Menu.buildFromTemplate(template);
