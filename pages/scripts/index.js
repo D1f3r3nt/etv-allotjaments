@@ -6,17 +6,12 @@ const cards = $('#container')
 
 $(() => {
 
-  ipcRenderer.send('get_allotjaments');
 
-  ipcRenderer.on('res_get_allotjaments', (_, dato) => {
     let response = dato.data
+    const response = new Set();
+    //dato.data.map(e => )
 
-    response.map(dato => {
       cards.append(CardIndex({
-        id: dato.id,
-        image: 'https://loremflickr.com/300/225/house',
-        name: dato.nom,
-        description: dato.descripcio
       }))
     });
   })
