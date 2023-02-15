@@ -1,0 +1,36 @@
+body {
+    background-color: #f8edeb;
+}
+nav div {
+    color: white;
+    height: 50px;
+}
+
+
+#imatge{
+    height: 400px;
+}
+
+#capsa_info{
+    height: 400px;
+    background-color: #ffe5d9;
+
+}
+
+#titol_info {
+    
+}
+
+#columna2 {
+    background-color: #ffe5d9;
+}
+
+#direccio {
+    height: 200px;
+    background-color: #ffe5d9;
+}
+
+#mapa {
+    height: 200px;
+
+}
