@@ -1,4 +1,6 @@
-const { net, ipcMain, BrowserWindow } = require('electron')
+const { net, ipcMain, BrowserWindow, Menu } = require('electron');
+const { myMenuLogged } = require('../components/menu_logged');
+const { win } = require('../main');
 
 //Variable token
 let token;
@@ -97,6 +99,11 @@ ipcMain.on('post_login', (e, args) => {
         userId = responseData.data.usuari.id;
         // Enviar Info a la finestra principal
         // win.webContents.send('res_post_login', responseData);
+
+        //Canviar Menu
+        Menu.setApplicationMenu(myMenuLogged(win));
+
+
       }
     });
   });

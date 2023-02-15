@@ -1,15 +1,15 @@
 const { Menu, app, BrowserWindow } = require('electron/main');
+const { myMenu } = require('./menu');
 
 const isMac = process.platform === 'darwin';
-
-
 
 /**
  * Creamos el menu y lo exportamos a la vez
  * @param {*} win le pasamos el elemento de BrowserWindow
  * @returns devuelve el menu ya preparado
  */
-exports.myMenu = function (win) {
+
+exports.myMenuLogged = function (win) {
   const template = [
     ...(isMac ? [{
       label: app.name,
@@ -29,16 +29,42 @@ exports.myMenu = function (win) {
         }
       ]
     },
+    // Admin Menu
+        {
+          label: 'Administracio',
+          submenu: [
+            {
+              label: 'Allotjaments',
+              click: () => win.loadFile('./pages/admin_allotjament.html')
+            },
+            {
+              label: 'Comentaris',
+              click: () => createLogin(win)
+            },
+            {
+              label: 'Reserves',
+              click: () => createLogin(win)
+            },
+            {
+              label: 'Serveis',
+              click: () => createLogin(win)
+            },
+          ]
+        },
     {
-      label: 'Login',
+      label: 'LogOut',
       submenu: [
         {
-          label: 'Login',
-          click: () => createLogin(win)
+          label: 'LogOut',
+          click() {
+            //Canviar Menu
+            Menu.setApplicationMenu(myMenu(win));
+            // Accions a realitzar quan es surt
+          }
+          
         }
       ]
     },
-
   // DEVELOPING MENU
   // Comentar abans d'entregar
   {
