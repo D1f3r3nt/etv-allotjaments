@@ -5,8 +5,8 @@ const { win } = require('../main');
 //Variable token
 let token;
 let userId;
-let hostApi = 'etv.dawpaucasesnoves.com/etvServidor/public'
-let hostProtocol = 'http:'
+const hostApi = 'etv.dawpaucasesnoves.com/etvServidor/public'
+const hostProtocol = 'http:'
 
 // Close
 ipcMain.on('close_window', (e, args) => {
