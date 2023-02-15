@@ -1,7 +1,7 @@
 #login-form {
     width: 400px;
     height: 300px;
-    background-color: blue;
+    background-color: lightblue;
     display: flex;
     justify-content: space-around;
     align-items: center;

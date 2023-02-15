@@ -2,6 +2,7 @@ const { net, ipcMain, BrowserWindow } = require('electron')
 
 //Variable token
 let token;
+let userId;
 let hostApi = 'etv.dawpaucasesnoves.com/etvServidor/public'
 let hostProtocol = 'http:'
 
@@ -70,11 +71,8 @@ ipcMain.on('get_fotos', (e, args) => {
 // POST Login
 ipcMain.on('post_login', (e, args) => {
 
-  console.log(args)
-
   //Variables
   var body = JSON.stringify(args);
-  var statusCode
 
   // Request
   const request = net.request({
@@ -87,14 +85,21 @@ ipcMain.on('post_login', (e, args) => {
 
   request.on('response', (response) => {
     response.on('data', (chunk) => {
-      e.sender.send('res_post_login', JSON.parse(chunk))
 
-      // Guardar Token
-      token = 'Bearer ' + responseData.data.token;
-      // U
+      responseData = JSON.parse(chunk);
+      e.sender.send('res_post_login', responseData)
+
+      // Guardam Credencials si hi ha Login
+      if (responseData.status == "success") {
+        // Guardar Token
+        token = 'Bearer ' + responseData.data.token;
+        // Guardar Usuari
+        userId = responseData.data.usuari.id;
+        // Enviar Info a la finestra principal
+        // win.webContents.send('res_post_login', responseData);
+      }
     });
   });
-
   request.setHeader('Content-Type', 'application/json');
   request.write(body, 'utf-8');
   request.end();
