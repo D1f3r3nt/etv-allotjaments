@@ -1,12 +1,19 @@
 const { net, ipcMain, BrowserWindow, Menu } = require('electron');
 const { myMenuLogged } = require('../components/menu_logged');
-const { win } = require('../main');
+const { get } = require('./crud');
+
+const hostApi = 'etv.dawpaucasesnoves.com/etvServidor/public'
+const hostProtocol = 'http:'
+let current_window;
 
 //Variable token
 let token;
 let userId;
-const hostApi = 'etv.dawpaucasesnoves.com/etvServidor/public'
-const hostProtocol = 'http:'
+
+
+exports.init = function (win) {
+  current_window = win;
+}
 
 // Close
 ipcMain.on('close_window', (e, args) => {
@@ -18,56 +25,16 @@ ipcMain.on('close_window', (e, args) => {
 
 // GET all Allotjaments
 ipcMain.on('get_allotjaments', (e, args) => {
-  const valueRequest = {
-    method: 'GET',
-    protocol: hostProtocol,
-    hostname: hostApi,
-    // port:'80',
-    path: '/api/allotjaments',
-  }
-
-  const request = net.request(valueRequest)
-
-  request.on('response', (response) => {
-    response.on('data', (chunk) => {
-      try {
-        e.sender.send('res_get_allotjaments', JSON.parse(chunk))
-        //console.log(`BODY: ${chunk}`)
-      } catch (e) {
-        console.log(e);
-      }
-    })
-  })
-
-  request.setHeader('Content-Type', 'application/json');
-  request.end()
+  get('/api/allotjaments', (chunk) => {
+    e.sender.send('res_get_allotjaments', JSON.parse(chunk))
+  });
 })
 
 // GET all Fotos
 ipcMain.on('get_fotos', (e, args) => {
-  const valueRequest = {
-    method: 'GET',
-    protocol: hostProtocol,
-    hostname: hostApi,
-    // port:'80',
-    path: '/api/fotos',
-  }
-
-  const request = net.request(valueRequest)
-
-  request.on('response', (response) => {
-    response.on('data', (chunk) => {
-      try {
-        e.sender.send('res_get_fotos', JSON.parse(chunk))
-        //console.log(`BODY: ${chunk}`)
-      } catch (e) {
-        console.log(e);
-      }
-    })
-  })
-
-  request.setHeader('Content-Type', 'application/json');
-  request.end()
+  get('/api/fotos', (chunk) => {
+    e.sender.send('res_get_fotos', JSON.parse(chunk))
+  });
 })
 
 // POST Login
@@ -101,7 +68,7 @@ ipcMain.on('post_login', (e, args) => {
         // win.webContents.send('res_post_login', responseData);
 
         //Canviar Menu
-        Menu.setApplicationMenu(myMenuLogged(win));
+        Menu.setApplicationMenu(myMenuLogged(current_window));
 
 
       }
@@ -141,4 +108,16 @@ ipcMain.on('get_municipis', (e, args) => {
   request.end();
 })
 
-//console.log("EXTRACT IPC WORKS");
+// Carga pagina de detalles
+ipcMain.on('load_page_detalls', (e, id) => {
+  current_window.loadFile('./pages/detalls.html');
+
+  get(`/api/allotjaments/${id}`, (chunk) => {
+    e.sender.send('res_load_data', JSON.parse(chunk))
+  });
+});
+
+// Cargar pagina principal
+ipcMain.on('load_home_page', () => {
+  current_window.loadFile('./pages/index.html')
+});

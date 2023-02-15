@@ -2,9 +2,6 @@ const { net, app, BrowserWindow, ipcMain, Menu } = require('electron');
 const { myMenu } = require('./components/menu');
 const ipc = require('./js/ipc');
 
-const hostApi = 'etv.dawpaucasesnoves.com/etvServidor/public'
-const hostProtocol = 'http:'
-
 let current_window;
 
 function createWindow() {
@@ -21,6 +18,8 @@ function createWindow() {
     Menu.setApplicationMenu(myMenu(win));
 
     win.loadFile('./pages/index.html');
+
+    ipc.init(win);
 
     return win;
 }
@@ -39,41 +38,6 @@ app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
-});
-
-ipcMain.on('load_page_detalls', (e, id) => {
-    current_window.loadFile('./pages/detalls.html');
-
-    ipcMain.on('load_data', (e, args) => {
-        const valueRequest = {
-            method: 'GET',
-            protocol: hostProtocol,
-            hostname: hostApi,
-            // port:'80',
-            path: `/api/allotjaments/${id}`,
-        }
-
-        const request = net.request(valueRequest)
-
-        request.on('response', (response) => {
-            response.on('data', (chunk) => {
-                try {
-                    e.sender.send('res_load_data', JSON.parse(chunk))
-                    //console.log(`BODY: ${chunk}`)
-                } catch (e) {
-                    console.log(e);
-                }
-            })
-        })
-
-        request.setHeader('Content-Type', 'application/json');
-        request.end()
-
-    });
-});
-
-ipcMain.on('load_home_page', () => {
-    current_window.loadFile('./pages/index.html')
 });
 
 //Messages
