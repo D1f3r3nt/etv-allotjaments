@@ -38,3 +38,7 @@ nav div {
     background-color: #ffe5d9;
     height: 500px;
 }
+
+#go_back {
+    cursor: pointer;
+}
