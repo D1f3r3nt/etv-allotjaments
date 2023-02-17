@@ -48,6 +48,10 @@ exports.myMenuLogged = function (win) {
           label: 'Serveis',
           click: () => createLogin(win)
         },
+        {
+          label: 'Dashboard',
+          click: () => win.loadFile('./pages/dashboard.html')
+        },
       ]
     },
     {

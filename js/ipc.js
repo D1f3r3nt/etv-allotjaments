@@ -78,8 +78,7 @@ ipcMain.on('post_login', (e, args) => {
 ipcMain.on('get_municipis', (e, args) => {
 
   //Variables
-  var body = JSON.stringify(args);
-  var statusCode
+  //var body = JSON.stringify(args);
 
   // Request
   const request = net.request({
@@ -92,14 +91,14 @@ ipcMain.on('get_municipis', (e, args) => {
 
   request.on('response', (response) => {
     response.on('data', (chunk) => {
-      e.sender.send('res_post_login', JSON.parse(chunk))
+      e.sender.send('res_get_municipis', JSON.parse(chunk))
       console.log(response);
     });
   });
 
   request.setHeader('Content-Type', 'application/json');
-  request.setHeader('Authorization', token);
-  request.write(body, 'utf-8');
+  //request.setHeader('Authorization', token);
+  //request.write(body, 'utf-8');
   request.end();
 })
 
@@ -139,6 +138,10 @@ function logout() {
   userId = ''
   console.log("token at END: " + token)
 }
+
+
+
+
 
 // ========================
 // Carga pagina de detalles
