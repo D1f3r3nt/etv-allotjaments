@@ -1,6 +1,8 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { net, app, BrowserWindow, ipcMain, Menu } = require('electron');
 const { myMenu } = require('./components/menu');
 const ipc = require('./js/ipc');
+
+let current_window;
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -16,12 +18,15 @@ function createWindow() {
     Menu.setApplicationMenu(myMenu(win));
 
     win.loadFile('./pages/index.html');
-    win.webContents.openDevTools();
+
+    ipc.init(win);
 
     return win;
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+    current_window = createWindow();
+});
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
