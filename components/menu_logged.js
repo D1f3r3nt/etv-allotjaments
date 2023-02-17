@@ -1,6 +1,5 @@
 const { Menu, app, BrowserWindow } = require('electron/main');
 const { myMenu } = require('./menu');
-
 const isMac = process.platform === 'darwin';
 
 /**
@@ -52,16 +51,17 @@ exports.myMenuLogged = function (win) {
           ]
         },
     {
-      label: 'LogOut',
+      label: 'Logout',
       submenu: [
         {
-          label: 'LogOut',
+          label: 'Logout',
           click() {
             //Canviar Menu
             Menu.setApplicationMenu(myMenu(win));
             // Accions a realitzar quan es surt
+            const ipc = require('../js/ipc.js')
+            ipc.logout()
           }
-          
         }
       ]
     },

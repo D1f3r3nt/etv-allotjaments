@@ -46,6 +46,10 @@ exports.myMenu = function (win) {
     submenu: [
       {
         role: 'toggleDevTools',
+      },
+      {
+        label: 'Test Screen',
+        click: () => win.loadFile('./pages/test.html')
       }
     ]
   }
