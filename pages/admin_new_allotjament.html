@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <!-- Grid JS -->
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <!-- Renderizados CSS -->
+    <link rel="stylesheet" href="../styles/admin_new_allotjament.css" />
+</head>
+
+<body>
+    <div class="container-lg mt-5">
+        <form class="needs-validation" novalidate>
+            <div class="row g-3 mb-5">
+                <h4 class="col-12 mb-3">Informació general</h4>
+                <div class="col-sm-6">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="nom" required>
+                    <div class="invalid-feedback">
+                        Es obligatori el nom
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="numeroRegistre" class="form-label">Numero de registre</label>
+                    <input type="text" class="form-control" id="numeroRegistre" required>
+                    <div class="invalid-feedback">
+                        Es obligatori el numero de registre
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="descripcio" class="form-label">Decripcio</label>
+                    <!--<span class="input-group-text">@</span>-->
+                    <input type="text" class="form-control" id="descripcio" required>
+                    <div class="invalid-feedback">
+                        Es obligatori la descripcio
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 mb-5">
+                <h4 class="col-12 mb-3">Direccio</h4>
+                <div class="col-sm-6">
+                    <label for="carrer" class="form-label">Carrer</label>
+                    <input type="text" class="form-control" id="carrer" required>
+                    <div class="invalid-feedback">
+                        Es obligatori el carrer
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label for="numero" class="form-label">Numero</label>
+                    <input type="text" class="form-control" id="numero" required>
+                    <div class="invalid-feedback">
+                        Es obligatori el numero
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label for="piso" class="form-label">Piso</label>
+                    <input type="text" class="form-control" id="piso" required>
+                    <div class="invalid-feedback">
+                        Es obligatori el piso
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label for="municipio" class="form-label">Municipio</label>
+                    <input type="email" class="form-control" id="municipio">
+                    <div class="invalid-feedback">
+                        Es obligatori el municipio
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label for="latitude" class="form-label">Latitude</label>
+                    <input type="number" class="form-control" id="latitude">
+                    <div class="invalid-feedback">
+                        Es obligatori la latitude
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label for="longitud" class="form-label">Longitud</label>
+                    <input type="number" class="form-control" id="longitud">
+                    <div class="invalid-feedback">
+                        Es obligatori la longitud
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 mb-5">
+                <h4 class="col-12 mb-3">Caracteristiques</h4>
+                <div class="col-sm-6">
+                    <label for="npersones" class="form-label">Numero de persones</label>
+                    <input type="number" class="form-control" id="npersones" required>
+                    <div class="invalid-feedback">
+                        Es obligatori posar el numero de persones
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="nllits" class="form-label">Numero de llits</label>
+                    <input type="number" class="form-control" id="nllits" required>
+                    <div class="invalid-feedback">
+                        Es obligatori posar el numero de llits
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="nhabitacions" class="form-label">Numero de habitacions</label>
+                    <input type="number" class="form-control" id="nhabitacions" required>
+                    <div class="invalid-feedback">
+                        Es obligatori posar el numero de habitacions
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="nbanys" class="form-label">Numero de banys</label>
+                    <input type="number" class="form-control" id="nbanys">
+                    <div class="invalid-feedback">
+                        Es obligatori posar el numero de banys
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 mb-5">
+                <h4 class="col-12 mb-3">Dades</h4>
+                <div class="col-sm-6">
+                    <label for="propietari" class="form-label">Propietari</label>
+                    <input type="text" class="form-control" id="propietari" required>
+                    <div class="invalid-feedback">
+                        Es obligatori posar el propietari
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <input type="text" class="form-control" id="categoria" required>
+                    <div class="invalid-feedback">
+                        Es obligatori posar la categoria
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="tallotjaments" class="form-label">Tipus de allotjaments</label>
+                    <input type="text" class="form-control" id="tallotjaments" required>
+                    <div class="invalid-feedback">
+                        Es obligatori posar el tipus de allotjament
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="tvacances" class="form-label">Tipus de vacances</label>
+                    <input type="text" class="form-control" id="tvacances">
+                    <div class="invalid-feedback">
+                        Es obligatori posar el tipus de vacances
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <!-- Renderizados JS  -->
+    <script src="./scripts/admin-allotjament.js"></script>
+</body>
+
+</html>

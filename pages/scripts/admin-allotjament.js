@@ -42,15 +42,6 @@ function taula(params) {
                     }, 'Edit');
                 },
             },
-            {
-                name: '',
-                formatter: (cell, row) => {
-                    return h('button', {
-                        className: 'btn btn-danger',
-                        onClick: () => alert(`Delete "${row.cells[0].data}" "${row.cells[1].data}"`)
-                    }, 'Delete');
-                },
-            },
         ],
         data: params,
         search: true,

@@ -27,6 +27,27 @@ function get(endpoint, callback) {
     request.end()
 }
 
+function post(endpoint, body, callback) {
+    // Request
+    const request = net.request({
+        method: 'POST',
+        protocol: hostProtocol,
+        hostname: hostApi,
+        // port:'80',
+        path: endpoint,
+    });
+
+    request.on('response', (response) => {
+        response.on('data', (chunk) => {
+            callback(chunk);
+        });
+    });
+    request.setHeader('Content-Type', 'application/json');
+    request.write(body, 'utf-8');
+    request.end();
+}
+
 module.exports = {
     get,
+    post,
 }

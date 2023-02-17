@@ -29,27 +29,27 @@ exports.myMenuLogged = function (win) {
       ]
     },
     // Admin Menu
+    {
+      label: 'Administracio',
+      submenu: [
         {
-          label: 'Administracio',
-          submenu: [
-            {
-              label: 'Allotjaments',
-              click: () => win.loadFile('./pages/admin_allotjament.html')
-            },
-            {
-              label: 'Comentaris',
-              click: () => createLogin(win)
-            },
-            {
-              label: 'Reserves',
-              click: () => createLogin(win)
-            },
-            {
-              label: 'Serveis',
-              click: () => createLogin(win)
-            },
-          ]
+          label: 'Llista allotjaments',
+          click: () => win.loadFile('./pages/admin_allotjament.html')
         },
+        {
+          label: 'Crear allotjaments',
+          click: () => win.loadFile('./pages/admin_new_allotjament.html')
+        },
+        {
+          label: 'Reserves',
+          click: () => createLogin(win)
+        },
+        {
+          label: 'Serveis',
+          click: () => createLogin(win)
+        },
+      ]
+    },
     {
       label: 'Logout',
       submenu: [
@@ -62,19 +62,20 @@ exports.myMenuLogged = function (win) {
             const ipc = require('../js/ipc.js')
             ipc.logout()
           }
+
         }
       ]
     },
-  // DEVELOPING MENU
-  // Comentar abans d'entregar
-  {
-    label: 'Developer',
-    submenu: [
-      {
-        role: 'toggleDevTools',
-      }
-    ]
-  }
+    // DEVELOPING MENU
+    // Comentar abans d'entregar
+    {
+      label: 'Developer',
+      submenu: [
+        {
+          role: 'toggleDevTools',
+        }
+      ]
+    }
   ];
 
   return Menu.buildFromTemplate(template);

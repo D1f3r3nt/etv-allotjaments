@@ -19,12 +19,14 @@ $(() => {
         foto = value.fotos[0].url;
       }
 
-      cards.append(CardIndex({
-        id: value.id,
-        image: foto,
-        name: value.nom,
-        description: value.descripcio
-      }))
+      if (value.aprovat === 1) {
+        cards.append(CardIndex({
+          id: value.id,
+          image: foto,
+          name: value.nom,
+          description: value.descripcio
+        }))
+      }
     });
   })
 
