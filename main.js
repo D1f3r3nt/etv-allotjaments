@@ -1,4 +1,4 @@
-const { net, app, BrowserWindow, ipcMain, Menu } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const { myMenu } = require('./components/menu');
 const ipc = require('./js/ipc');
 

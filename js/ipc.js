@@ -10,9 +10,11 @@ let current_window;
 let token;
 let userId;
 
-exports.init = function (win) {
+function init(win) {
+  console.log(win);
   current_window = win;
 }
+
 // ========================
 // Close a page
 // ========================
@@ -104,7 +106,6 @@ ipcMain.on('get_municipis', (e, args) => {
 // ========================
 // Log Out
 // ========================
-module.exports = { logout };
 function logout() {
   console.log("token at START: " + token)
 
@@ -156,3 +157,9 @@ ipcMain.on('load_page_detalls', (e, id) => {
 ipcMain.on('load_home_page', () => {
   current_window.loadFile('./pages/index.html')
 });
+
+
+module.exports = {
+  logout,
+  init
+};

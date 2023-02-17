@@ -2,17 +2,20 @@ body {
     background-color: #f8edeb;
     margin-bottom: 30px;
 }
+
 nav div {
     color: white;
     height: 50px;
 }
 
 
-#imatge{
+#imatge {
     height: 400px;
+    max-width: 600px;
+    object-fit: contain;
 }
 
-#capsa_info{
+#capsa_info {
     height: 400px;
     background-color: #ffe5d9;
 
@@ -31,7 +34,7 @@ nav div {
     height: 400px;
 }
 
-#columna_comentaris{
+#columna_comentaris {
     background-color: #ffe5d9;
     height: 500px;
 }
