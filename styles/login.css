@@ -1,7 +1,7 @@
 #login-form {
     width: 400px;
     height: 300px;
-    background-color: lightblue;
+    background-color: #d8e2dc;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -10,7 +10,7 @@
 }
 
 body {
-    background-color: purple;
+    background-color: #f8edeb;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,7 +54,13 @@ button {
 
 button[type='submit'] {
     color: black;
-    background-color: aquamarine;
+    background-color: #f8edeb;
+    border-color: #f8edeb;
+}
+button[type='submit']:hover {
+    color: black;
+    background-color: #f8edeb;
+    border-color: #f8edeb;
 }
 
 button:hover {

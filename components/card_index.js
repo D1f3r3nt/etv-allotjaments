@@ -11,7 +11,7 @@ exports.CardIndex = function (object) {
 
     let info = $(`<p class="card-text">${object.description}</p>`);
 
-    let button = $(`<button id="${object.id}" class="btn btn-primary align-self-center" onclick="masInfo(this.id)">Més informació</button>`);
+    let button = $(`<button id="${object.id}" class="btn btn-primary align-self-center boto" onclick="masInfo(this.id)">Més informació</button>`);
 
     return div_card.append(image, div_body.append(title, info, button));
 }

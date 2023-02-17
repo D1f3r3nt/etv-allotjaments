@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <!-- Renderizados CSS -->
     <link rel="stylesheet" href="../styles/detalls.css" />
+    <!-- Mapa -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
 </head>
 
 <body>
@@ -39,22 +43,25 @@
         </div>
     </div>
 
-    <div id="columna2" class="container text-center mt-4 border shadow-lg rounded-3 mt-4">
-        <div id="descripcio" class="container text-center fs-3 ">DESCRIPCIO</div>
-        <div class="text-start">Casa de camp situada dins el terme de Muro situada a...</div>
+    <div id="columna2" class="container text-center mt-4 border shadow-lg rounded-3 mt-4 fs-3">DESCRIPCIO
+        <div id="descripcio" class="container text-start fs-6  mb-2"> <span id="descripcio"></span></div>
     </div>
 
     <div class="container">
         <div id="columna3" class="row align-items-center mt-4">
             <div id="direccio" class="col border rounded-3 me-2 shadow-lg">
                 <div class="container text-center fs-3">DIRECCIÓ</div>
-                <div class="mt-2">Carrer:</div>
-                <div class="mt-2">Número:</div>
-                <div class="mt-2">Pis:</div>
-                <div class="mt-2">Municipi:</div>
+                <div class="mt-1">Carrer: <span id="carrer"></span></div>
+                <div class="mt-1">Número: <span id="numero"></span></div>
+                <div class="mt-1">Pis: <span id="pis"></span></div>
+                <div class="mt-1">Municipi: <span id="municipi"></span></div>
+                <div class="mt-1">Illa: <span id="illa"></span></div>
             </div>
             <div id="mapa" class="col border border-dark border-3 rounded-3 ms-2"> Mapa </div>
         </div>
+    </div>
+    <div id="columna_comentaris" class="container text-center mt-4 border shadow-lg rounded-3 mt-4 fs-3"> COMENTARIS
+
     </div>
 
     <!-- Bootstrap -->
@@ -63,6 +70,10 @@
         crossorigin="anonymous"></script>
     <!-- Renderizados JS  -->
     <script src="./scripts/detalls.js"></script>
+    <!-- Mapa -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
 </body>
 
 </html>

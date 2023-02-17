@@ -1,3 +1,6 @@
+body {
+    background-color: #f8edeb;
+}
 .card {
     width: 18rem;
 }
@@ -9,7 +12,17 @@ nav div {
 #filter {
     width: 100%;
     height: 300px;
-    background-color: rgb(182, 182, 182);
+    background-color: #d8e2dc;
     border-radius: 0 0 8px 8px;
     padding-top: 50px;
+}
+
+.boto{
+    background-color: #99d98c;
+    border-color: #99d98c;
+}
+
+.boto:hover{
+    background-color: #6b9862;
+    border-color: #6b9862;
 }
