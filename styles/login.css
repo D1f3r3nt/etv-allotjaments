@@ -7,6 +7,8 @@
     align-items: center;
     flex-direction: column;
     border-radius: 10px;
+    margin-left: 40px;
+    margin-top: 30px;
 }
 
 body {
@@ -32,6 +34,7 @@ body {
 .title {
     font-size: 20pt;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 input {
