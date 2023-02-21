@@ -102,6 +102,37 @@ ipcMain.on('get_municipis', (e, args) => {
   request.end();
 })
 
+
+// ========================
+// GET Comentaris Per Id
+// ========================
+ipcMain.on('get_comentaris_id', (e, args) => {
+
+  //Variables
+  //var body = JSON.stringify(args);
+
+  // Request
+  const request = net.request({
+    method: 'GET',
+    protocol: hostProtocol,
+    hostname: hostApi,
+    // port:'80',
+    path:`/api/comentaris/${args}`,
+  });
+
+  request.on('response', (response) => {
+    response.on('data', (chunk) => {
+      e.sender.send('res_get_comentaris_id', JSON.parse(chunk))
+      console.log(response);
+    });
+  });
+
+  request.setHeader('Content-Type', 'application/json');
+  //request.setHeader('Authorization', token);
+  //request.write(body, 'utf-8');
+  request.end();
+})
+
 // ========================
 // Log Out
 // ========================
@@ -166,3 +197,4 @@ module.exports = {
   logout,
   init
 };
+

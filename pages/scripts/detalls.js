@@ -18,6 +18,7 @@ const pis = $('#pis');
 const municipi = $('#municipi');
 const illa = $('#illa');
 const goBack = $('#go_back');
+const comentari = $('#columna_comentaris');
 let mapa;
 
 
@@ -55,8 +56,21 @@ $(() => {
 
         var marker = L.marker([dato.latitud, dato.longitud]).addTo(mapa);
 
+        ipcRenderer.send('get_comentaris_id', dato.id);
 
     });
+
+    ipcRenderer.on('res_get_comentaris_id', (e, args) => {
+        let dato = args.data;
+
+        dato.forEach(element => {
+            comentari.append(`<div id='comentaris' class='border-bottom border-dark border-2 mt-4'><div id='comentari' class="fs-5 text-start m-2 ps-1 ">Comentari: ` + element.comentari
+            + `</div><div id=''valoracions' class="fs-5 text-start m-2 ps-1">Valoració: ` + element.valoracio + `</div></div>`);
+            //valoracio.append(`<div id='valoracio' class="fs-5 text-start mt-3 p-3 border border-dark border-2 rounded-3">` + element.valoracio + `</div>`);
+            
+        });
+        
+    })
 
     goBack.on('click', () => {
         ipcRenderer.send('load_home_page');
