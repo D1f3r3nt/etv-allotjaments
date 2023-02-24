@@ -47,6 +47,8 @@ ipcMain.on('get_fotos', (e, args) => {
 // ========================
 ipcMain.on('post_login', (e, args) => {
 
+    console.log("AAAAAAAA")
+
     //Variables
     var body = JSON.stringify(args);
 
