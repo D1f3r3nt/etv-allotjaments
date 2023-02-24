@@ -40,19 +40,25 @@ exports.myMenuLogged = function (win) {
           label: 'Crear allotjaments',
           click: () => win.loadFile('./pages/admin_new_allotjament.html')
         },
+      ]
+    },
+    {
+      label: 'Taulers',
+      submenu: [
         {
-          label: 'Reserves',
-          click: () => createLogin(win)
-        },
-        {
-          label: 'Serveis',
-          click: () => createLogin(win)
-        },
-        {
-          label: 'Dashboard',
+          label: 'Taulers',
           click: () => win.loadFile('./pages/dashboard.html')
         },
-      ]
+      ],
+    },
+    {
+      label: 'Mapa',
+      submenu: [
+        {
+          label: 'Mapa',
+          click: () => win.loadFile('./pages/mapa.html')
+        },
+      ],
     },
     {
       label: 'Logout',

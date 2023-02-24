@@ -14,13 +14,13 @@ function get(endpoint, callback) {
     const request = net.request(valueRequest);
 
     request.on('response', (response) => {
+        data = "";
         response.on('data', (chunk) => {
-            try {
-                callback(chunk);
-            } catch (e) {
-                console.log(e);
-            }
-        })
+            data+=chunk;
+        });
+        response.on('end', () => {
+            callback(data);
+        });
     });
 
     request.setHeader('Content-Type', 'application/json');
@@ -38,8 +38,12 @@ function post(endpoint, body, callback) {
     });
 
     request.on('response', (response) => {
+        data = "";
         response.on('data', (chunk) => {
-            callback(chunk);
+            data+=chunk;
+        });
+        response.on('end', () => {
+            callback(data);
         });
     });
     request.setHeader('Content-Type', 'application/json');
@@ -58,8 +62,12 @@ function postWithToken(endpoint, body, token, callback) {
     });
 
     request.on('response', (response) => {
+        data = "";
         response.on('data', (chunk) => {
-            callback(chunk);
+            data+=chunk;
+        });
+        response.on('end', () => {
+            callback(data);
         });
     });
 

@@ -1,5 +1,6 @@
 let $ = { jquery } = require('jquery');
 const { ipcRenderer } = require("electron");
+const { snackCorrect, snackError } = require('../components/snackbars.js');
 
 const create = $('#create');
 const nom = $('#nom');
@@ -21,7 +22,8 @@ const tallotjaments = $('#tallotjaments');
 const tvacances = $('#tvacances');
 
 $(() => {
-    create.on('click', () => {
+    create.on('click', (e) => {
+        e.preventDefault();
         console.log('CLICK');
         const data = {
             "nom": nom.val(),
@@ -46,8 +48,8 @@ $(() => {
         ipcRenderer.send('post_allotjament', data);
 
         ipcRenderer.on('res_post_allotjament', (_, args) => {
-            if (args.status === 'success') console.log('OK');
-            else console.log('False')
+            if (args.status === 'success') snackCorrect("Allotjament creat");
+            else snackError(`ERROR: Nom repetit o NRegistre repetit`);
         });
     });
 });
