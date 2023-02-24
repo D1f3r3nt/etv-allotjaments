@@ -10,8 +10,9 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <!-- Grid JS -->
-    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <!--Leaflet's-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <!-- Renderizados CSS -->
     <link rel="stylesheet" href="../styles/admin_new_allotjament.css" />
     <link rel="stylesheet" href="../styles/snackbar.css" />
@@ -50,45 +51,51 @@
             <div class="row g-3 mb-5">
                 <h4 class="col-12 mb-3">Direccio</h4>
                 <div class="col-sm-6">
-                    <label for="carrer" class="form-label">Carrer</label>
-                    <input type="text" class="form-control" id="carrer" required>
-                    <div class="invalid-feedback">
-                        Es obligatori el carrer
+                    <div class="col-sm-12">
+                        <label for="carrer" class="form-label">Carrer</label>
+                        <input type="text" class="form-control" id="carrer" required>
+                        <div class="invalid-feedback">
+                            Es obligatori el carrer
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-sm-6">
+                            <label for="numero" class="form-label">Numero</label>
+                            <input type="text" class="form-control" id="numero" required>
+                            <div class="invalid-feedback">
+                                Es obligatori el numero
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="piso" class="form-label">Piso</label>
+                            <input type="text" class="form-control" id="piso" required>
+                            <div class="invalid-feedback">
+                                Es obligatori el piso
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mt-1">
+                        <label for="municipio" class="form-label">Municipio</label>
+                        <select class="form-select" id="municipio">
+                        </select>
+                        <div class="invalid-feedback">
+                            Es obligatori el municipio
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-sm-6">
+                            <label for="latitude" class="form-label">Latitud</label>
+                            <input type="text" class="form-control" id="latitude" readonly>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="longitud" class="form-label">Longitud</label>
+                            <input type="text" class="form-control" id="longitud" readonly>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <label for="numero" class="form-label">Numero</label>
-                    <input type="text" class="form-control" id="numero" required>
-                    <div class="invalid-feedback">
-                        Es obligatori el numero
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <label for="piso" class="form-label">Piso</label>
-                    <input type="text" class="form-control" id="piso" required>
-                    <div class="invalid-feedback">
-                        Es obligatori el piso
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <label for="municipio" class="form-label">Municipio</label>
-                    <input type="email" class="form-control" id="municipio">
-                    <div class="invalid-feedback">
-                        Es obligatori el municipio
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <label for="latitude" class="form-label">Latitude</label>
-                    <input type="number" class="form-control" id="latitude">
-                    <div class="invalid-feedback">
-                        Es obligatori la latitude
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <label for="longitud" class="form-label">Longitud</label>
-                    <input type="number" class="form-control" id="longitud">
-                    <div class="invalid-feedback">
-                        Es obligatori la longitud
+                <div class="col-sm-6">
+                    <div class="col-sm-12 cont">
+                        <div id="map"></div>
                     </div>
                 </div>
             </div>
@@ -134,21 +141,24 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="categoria" class="form-label">Categoria</label>
-                    <input type="text" class="form-control" id="categoria" required>
+                    <select class="form-select" id="categoria">
+                    </select>
                     <div class="invalid-feedback">
                         Es obligatori posar la categoria
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <label for="tallotjaments" class="form-label">Tipus de allotjaments</label>
-                    <input type="text" class="form-control" id="tallotjaments" required>
+                    <select class="form-select" id="tallotjaments">
+                    </select>
                     <div class="invalid-feedback">
                         Es obligatori posar el tipus de allotjament
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <label for="tvacances" class="form-label">Tipus de vacances</label>
-                    <input type="text" class="form-control" id="tvacances">
+                    <select class="form-select" id="tvacances">
+                    </select>
                     <div class="invalid-feedback">
                         Es obligatori posar el tipus de vacances
                     </div>
@@ -159,6 +169,9 @@
     </div>
     <!-- Implementamos el snackbar -->
     <div id="snackbar"></div>
+    <!--Leaflet's-->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"

@@ -42,6 +42,36 @@ ipcMain.on('get_fotos', (e, args) => {
     });
 });
 
+
+// ========================
+// GET all Tipus allotjaments
+// ========================
+ipcMain.on('get_tipus_allotjaments', (e, args) => {
+    get('api/tipus_allotjaments', (chunk) => {
+        e.sender.send('res_get_tipus_allotjaments', JSON.parse(chunk))
+    });
+});
+
+// ========================
+// GET all Tipus vacances
+// ========================
+ipcMain.on('get_tipus_vacances', (e, args) => {
+    get('api/tipus_vacances', (chunk) => {
+        e.sender.send('res_get_tipus_vacances', JSON.parse(chunk))
+    });
+});
+
+
+
+// ========================
+// GET all Categorias
+// ========================
+ipcMain.on('get_categories', (e, args) => {
+    get('api/categories', (chunk) => {
+        e.sender.send('res_get_categories', JSON.parse(chunk))
+    });
+});
+
 // ========================
 // POST Login
 // ========================

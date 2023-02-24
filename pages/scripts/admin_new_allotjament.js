@@ -22,6 +22,67 @@ const tallotjaments = $('#tallotjaments');
 const tvacances = $('#tvacances');
 
 $(() => {
+    // Municipis
+    ipcRenderer.send('get_municipis');
+
+    ipcRenderer.on('res_get_municipis', (e, args) => {
+        let municipis = args.data;
+        //
+        municipis.forEach((e) => {
+            municipio.append(`<option value="${e.id}">${e.municipi}, ${e.illa}</option>`);
+        });
+    });
+
+    //Tipus allotjament
+    ipcRenderer.send('get_tipus_allotjaments');
+
+    ipcRenderer.on('res_get_tipus_allotjaments', (e, args) => {
+        let tallotjament = args.data;
+        //
+        tallotjament.forEach((e) => {
+            tallotjaments.append(`<option value="${e.id}">${e.tipus_allotjament}</option>`);
+        });
+    });
+
+    //Tipus vacances
+    ipcRenderer.send('get_tipus_vacances');
+
+    ipcRenderer.on('res_get_tipus_vacances', (e, args) => {
+        let vac = args.data;
+        //
+        vac.forEach((e) => {
+            tvacances.append(`<option value="${e.id}">${e.tipus_vacances}</option>`);
+        });
+    });
+
+    //Tipus categoria
+    ipcRenderer.send('get_categories');
+
+    ipcRenderer.on('res_get_categories', (e, args) => {
+        let cat = args.data;
+        //
+        cat.forEach((e) => {
+            categoria.append(`<option value="${e.id}">${e.categoria}</option>`);
+        });
+    });
+
+    //Mapa
+    const map = L.map('map').setView([39.627137, 2.977492], 9);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    map.on('click', function(e) {
+        var popLocation= e.latlng;
+        latitude.val(popLocation.lat);
+        longitud.val(popLocation.lng);
+        var popup = L.popup()
+            .setLatLng(popLocation)
+            .setContent("Nueva casa")
+            .openOn(map);
+    });
+
     create.on('click', (e) => {
         e.preventDefault();
         console.log('CLICK');
