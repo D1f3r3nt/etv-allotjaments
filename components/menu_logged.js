@@ -63,8 +63,9 @@ exports.myMenuLogged = function (win) {
             //Canviar Menu
             Menu.setApplicationMenu(myMenu(win));
             // Accions a realitzar quan es surt
-            const ipc = require('../js/ipc.js')
-            ipc.logout()
+            const ipc = require('../js/ipc.js');
+            ipc.logout();
+            win.loadFile('./pages/index.html');
           }
 
         }

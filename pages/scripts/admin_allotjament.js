@@ -7,10 +7,10 @@ $(() => {
     ipcRenderer.send('get_allotjaments');
 
     ipcRenderer.on('res_get_allotjaments', (_, dato) => {
-        let response = dato.data
+        let response = dato.data;
 
         response.map(dato => {
-            let info = []
+            let info = [];
             info.push(dato.id);
             info.push(dato.nom);
             info.push(dato.nregistre);
