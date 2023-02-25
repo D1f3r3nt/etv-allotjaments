@@ -51,6 +51,31 @@ function post(endpoint, body, callback) {
     request.end();
 }
 
+function getWithToken(endpoint, body, token, callback) {
+    // Request
+    const request = net.request({
+        method: 'GET',
+        protocol: hostProtocol,
+        hostname: hostApi,
+        path: endpoint,
+    });
+
+    request.on('response', (response) => {
+        data = "";
+        response.on('data', (chunk) => {
+            data+=chunk;
+        });
+        response.on('end', () => {
+            callback(data);
+        });
+    });
+
+    request.setHeader('Content-Type', 'application/json');
+    request.setHeader('Authorization', token);
+    request.write(body, 'utf-8');
+    request.end();
+}
+
 function postWithToken(endpoint, body, token, callback) {
     // Request
     const request = net.request({
@@ -81,4 +106,5 @@ module.exports = {
     get,
     post,
     postWithToken,
+    getWithToken,
 };

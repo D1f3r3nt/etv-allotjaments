@@ -47,11 +47,12 @@ function taula(params) {
                 },
             },
         ],
+        height: '65vh',
         data: params,
         search: true,
         fixedHeader: true,
         pagination: {
-            limit: 5,
+            limit: 15,
             summary: false
         }
     }).render(document.getElementById("wrapper"));

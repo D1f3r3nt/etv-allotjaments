@@ -1,6 +1,6 @@
 const { net, ipcMain, BrowserWindow, Menu } = require('electron');
 const { myMenuLogged } = require('../components/menu_logged');
-const { get, post, postWithToken } = require('./crud');
+const { get, post, postWithToken, getWithToken } = require('./crud');
 const Store = require('electron-store');
 const store = new Store();
 
@@ -103,7 +103,6 @@ ipcMain.on('get_tipus_vacances', (e, args) => {
 });
 
 
-
 // ========================
 // GET all Categorias
 // ========================
@@ -118,24 +117,9 @@ ipcMain.on('get_categories', (e, args) => {
 // ========================
 ipcMain.on('get_municipis', (e, args) => {
 
-    // Request
-    const request = net.request({
-        method: 'GET',
-        protocol: hostProtocol,
-        hostname: hostApi,
-        // port:'80',
-        path: '/api/municipis',
-    });
-
-    request.on('response', (response) => {
-        response.on('data', (chunk) => {
-            e.sender.send('res_get_municipis', JSON.parse(chunk));
-            console.log(response);
-        });
-    });
-
-    request.setHeader('Content-Type', 'application/json');
-    request.end();
+    get('/api/municipis', (chunk) => {
+        e.sender.send('res_get_municipis', JSON.parse(chunk));
+    })
 });
 
 
@@ -144,24 +128,9 @@ ipcMain.on('get_municipis', (e, args) => {
 // ========================
 ipcMain.on('get_comentaris_id', (e, args) => {
 
-    // Request
-    const request = net.request({
-        method: 'GET',
-        protocol: hostProtocol,
-        hostname: hostApi,
-        // port:'80',
-        path:`/api/comentaris/${args}`,
+    get(`/api/comentaris/${args}`, (chunk) => {
+        e.sender.send('res_get_comentaris_id', JSON.parse(chunk));
     });
-
-    request.on('response', (response) => {
-        response.on('data', (chunk) => {
-            e.sender.send('res_get_comentaris_id', JSON.parse(chunk));
-            console.log(response);
-        });
-    });
-
-    request.setHeader('Content-Type', 'application/json');
-    request.end();
 });
 
 // ========================
@@ -197,7 +166,6 @@ ipcMain.on('post_login', (e, args) => {
 // POST Allotjament
 // ========================
 ipcMain.on('post_allotjament', (e, args) => {
-
     //Variables
     var body = JSON.stringify(args);
     console.log(body);
@@ -214,31 +182,9 @@ ipcMain.on('post_allotjament', (e, args) => {
 // ========================
 function logout() {
     console.log("token at START: " + token);
-
-    //Crida API LogOut
-    // Request
-    const request = net.request({
-        method: 'GET',
-        protocol: hostProtocol,
-        hostname: hostApi,
-        // port:'80',
-        path: '/api/logout',
+    getWithToken('/api/logout', "", token, (chunk) => {
+        console.log(JSON.parse(chunk));
     });
-
-    request.on('response', (response) => {
-        response.on('data', (chunk) => {
-            console.log("RESPONSE");
-            console.log(response);
-            console.log("JSON CHUNK");
-            console.log(JSON.parse(chunk));
-
-        });
-    });
-
-    request.setHeader('Content-Type', 'application/json');
-    request.setHeader('Authorization', token);
-    request.write("", 'utf-8');
-    request.end();
 
     // Buidar Variables
     token = '';
