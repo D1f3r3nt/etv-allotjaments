@@ -26,3 +26,7 @@ nav div {
     background-color: #6b9862;
     border-color: #6b9862;
 }
+
+.mxw-600 {
+    max-width: 600px !important;
+}

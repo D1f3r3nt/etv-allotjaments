@@ -20,25 +20,36 @@
             Etv Allotjaments
         </div>
     </nav>
-    <div id="filter" class="container-fluid d-flex flex-column justify-content-end">
-        <div class="row">
-            <div class="col">
-                <label for="customRange1" class="form-label">Example range</label>
-                <input type="range" class="form-range" id="customRange1">
+    <div id="filter" class="container-fluid d-flex flex-column justify-content-center align-items-center">
+        <div class="row mxw-600 mb-2">
+            <div class="col-sm-6">
+                <label for="nom" class="form-label">Titol de l'allotjament</label>
+                <input type="text" class="form-control" id="nom">
             </div>
-            <div class="col">
-                <label for="customRange2" class="form-label">Example range</label>
-                <input type="range" class="form-range" id="customRange2">
+            <div class="col-sm-6">
+                <label for="municipio" class="form-label">Municipi</label>
+                <select class="form-select" id="municipio">
+                    <option value="-1" selected>Filtra per mucipi</option>
+                </select>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <label for="customRange3" class="form-label">Example range</label>
-                <input type="range" class="form-range" id="customRange3">
+        <div class="row mxw-600 mb-2">
+            <div class="col-sm-6">
+                <label for="categoria" class="form-label">Categoria</label>
+                <select class="form-select" id="categoria">
+                    <option value="-1" selected>Filtra per categoria</option>
+                </select>
             </div>
-            <div class="col">
-                <label for="customRange4" class="form-label">Example range</label>
-                <input type="range" class="form-range" id="customRange4">
+            <div class="col-sm-6">
+                <label for="tallotjaments" class="form-label">Tipus d'allotjament</label>
+                <select class="form-select" id="tallotjaments">
+                    <option value="-1" selected>Filtra per tipus d'allotjament</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mxw-600">
+            <div class="col-sm-12">
+                <button id="filtrar" class="btn btn-primary">Filtrar</button>
             </div>
         </div>
     </div>

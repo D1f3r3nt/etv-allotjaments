@@ -18,6 +18,7 @@ $(() => {
             info.push(dato.propietari.dni);
             info.push(dato.carrer);
             info.push(dato.numero);
+            info.push(dato.aprovat === 1 ? "Si" : "No");
 
             data.push(info);
         });
