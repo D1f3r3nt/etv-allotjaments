@@ -23,9 +23,9 @@
   },
   "dependencies": {
     "chart.js": "^4.2.0",
+    "electron-store": "^8.1.0",
     "gridjs": "^6.0.6",
     "jquery": "^3.6.3",
-    "jquery-validation": "^1.19.5",
     "nodemon": "^2.0.20"
   }
 }

@@ -3,13 +3,37 @@ const { ipcRenderer } = require("electron");
 
 const cancel = $('#cancel');
 const send = $('#send');
+const rememberIn = $('#remember');
+
+const inputPassword = $('#inputPassword');
+const inputUser = $('#inputUser');
+
+$(() => {
+    ipcRenderer.send('get_storage');
+
+    ipcRenderer.on('res_get_storage', (e, data) => {
+        if (data.remember) {
+            inputPassword.val(data.password);
+            inputUser.val(data.user);
+            rememberIn.prop("checked", true );
+        }
+    });
+});
 
 send.on('click', (evt) => {
     evt.preventDefault();
+    ipcRenderer.send('clear_storage');
+
+    if (rememberIn.is(':checked')) {
+        ipcRenderer.send('save_storage', {
+            user: inputUser.val(),
+            password: inputPassword.val(),
+        });
+    }
 
     let credencials = JSON.parse(`{
-        "email": "${document.getElementById("inputUser").value}",
-        "password": "${document.getElementById("inputPassword").value}"
+        "email": "${inputUser.val()}",
+        "password": "${inputPassword.val()}"
       }`);
 
     ipcRenderer.send('post_login', credencials);

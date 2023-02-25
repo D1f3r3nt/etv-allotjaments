@@ -1,6 +1,8 @@
 const { net, ipcMain, BrowserWindow, Menu } = require('electron');
 const { myMenuLogged } = require('../components/menu_logged');
 const { get, post, postWithToken } = require('./crud');
+const Store = require('electron-store');
+const store = new Store();
 
 const hostApi = 'etv.dawpaucasesnoves.com/etvServidor/public';
 const hostProtocol = 'http:';
@@ -9,6 +11,8 @@ let current_window;
 //Variable token
 let token;
 let userId;
+let user;
+let password;
 
 function init(win) {
     current_window = win;
@@ -21,7 +25,44 @@ ipcMain.on('close_window', (e, args) => {
 
     const login = BrowserWindow.fromWebContents(e.sender);
     login.close();
+});
 
+// ========================
+// GET local storage
+// ========================
+ipcMain.on('get_storage', (e, _) => {
+    if (store.has('remember')) {
+        if (!password || !user) {
+            password = store.get('password');
+            user = store.get('user');
+        }
+
+        e.sender.send('res_get_storage', {
+            remember: true,
+            user: user,
+            password: password,
+        });
+    } else {
+        e.sender.send('res_get_storage', {
+            remember: false,
+        });
+    }
+});
+
+// ========================
+// POST local storage
+// ========================
+ipcMain.on('save_storage', (_, data) => {
+    store.set('remember', true);
+    store.set('user', data.user);
+    store.set('password', data.password);
+});
+
+// ========================
+// DELETE local storage
+// ========================
+ipcMain.on('clear_storage', (y, x) => {
+    store.clear();
 });
 
 // ========================
@@ -69,51 +110,6 @@ ipcMain.on('get_tipus_vacances', (e, args) => {
 ipcMain.on('get_categories', (e, args) => {
     get('api/categories', (chunk) => {
         e.sender.send('res_get_categories', JSON.parse(chunk))
-    });
-});
-
-// ========================
-// POST Login
-// ========================
-ipcMain.on('post_login', (e, args) => {
-
-    console.log("AAAAAAAA")
-
-    //Variables
-    var body = JSON.stringify(args);
-
-    post('/api/login', body, (chunk) => {
-        responseData = JSON.parse(chunk);
-        e.sender.send('res_post_login', responseData);
-
-        // Guardam Credencials si hi ha Login
-        if (responseData.status === "success") {
-            // Guardar Token
-            token = 'Bearer ' + responseData.data.token;
-            // Guardar Usuari
-            userId = responseData.data.usuari.id;
-            // Enviar Info a la finestra principal
-            // win.webContents.send('res_post_login', responseData);
-
-            //Canviar Menu
-            Menu.setApplicationMenu(myMenuLogged(current_window));
-        }
-    });
-});
-
-// ========================
-// POST Allotjament
-// ========================
-ipcMain.on('post_allotjament', (e, args) => {
-
-    //Variables
-    var body = JSON.stringify(args);
-    console.log(body);
-
-    postWithToken('/api/allotjaments', body, token,(chunk) => {
-        responseData = JSON.parse(chunk);
-        console.log(responseData);
-        e.sender.send('res_post_allotjament', responseData);
     });
 });
 
@@ -166,6 +162,51 @@ ipcMain.on('get_comentaris_id', (e, args) => {
 
     request.setHeader('Content-Type', 'application/json');
     request.end();
+});
+
+// ========================
+// POST Login
+// ========================
+ipcMain.on('post_login', (e, args) => {
+
+    console.log(args)
+
+    //Variables
+    var body = JSON.stringify(args);
+
+    post('/api/login', body, (chunk) => {
+        responseData = JSON.parse(chunk);
+        e.sender.send('res_post_login', responseData);
+
+        // Guardam Credencials si hi ha Login
+        if (responseData.status === "success") {
+            // Guardar Token
+            token = 'Bearer ' + responseData.data.token;
+            // Guardar Usuari
+            userId = responseData.data.usuari.id;
+            // Enviar Info a la finestra principal
+            // win.webContents.send('res_post_login', responseData);
+
+            //Canviar Menu
+            Menu.setApplicationMenu(myMenuLogged(current_window));
+        }
+    });
+});
+
+// ========================
+// POST Allotjament
+// ========================
+ipcMain.on('post_allotjament', (e, args) => {
+
+    //Variables
+    var body = JSON.stringify(args);
+    console.log(body);
+
+    postWithToken('/api/allotjaments', body, token,(chunk) => {
+        responseData = JSON.parse(chunk);
+        console.log(responseData);
+        e.sender.send('res_post_allotjament', responseData);
+    });
 });
 
 // ========================

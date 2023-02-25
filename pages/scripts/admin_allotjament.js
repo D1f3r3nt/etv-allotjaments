@@ -14,6 +14,8 @@ $(() => {
             info.push(dato.id);
             info.push(dato.nom);
             info.push(dato.nregistre);
+            info.push(dato.propietari.nom);
+            info.push(dato.propietari.dni);
             info.push(dato.carrer);
             info.push(dato.numero);
 
@@ -29,8 +31,10 @@ function taula(params) {
     new Grid({
         columns: [
             "Id",
-            "Nom",
+            "Titol",
             "N. Registre",
+            "Propietari",
+            "Dni",
             "Carrer",
             "Numero",
             {
