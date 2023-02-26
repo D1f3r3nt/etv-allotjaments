@@ -42,3 +42,8 @@ nav div {
 #go_back {
     cursor: pointer;
 }
+
+#fotos-carousel img {
+    height: 400px;
+    object-fit: cover;
+}

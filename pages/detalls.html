@@ -23,10 +23,21 @@
         </div>
     </nav>
     <div class="container">
-        <div id="columna1" class="row align-items-center mt-4">
-            <img id="imatge" src="" alt="Imagen de la casa" class="col me-2">
-            <div id="capsa_info" class="col border rounded-3 ms-2 shadow-lg">
-                <div id="titol_info" class="container text-center fs-3 ">INFORMACIÓ</div>
+        <div id="columna1" class="row g-3 align-items-center mt-4">
+            <div id="carouselExampleIndicators" class="carousel slide col-sm-5 me-2">
+                <div class="carousel-indicators" id="buttons-carousel"></div>
+                <div class="carousel-inner" id="fotos-carousel"></div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            <div id="capsa_info" class="col-sm-6 border rounded-3 ms-2 shadow-lg">
+                <div id="titol_info" class="container text-center fs-3">INFORMACIÓ</div>
                 <div class="mt-2">Nom: <span id="nom"></span></div>
                 <div class="mt-2">Nº de registre: <span id="nregistre"></span></div>
                 <div class="mt-2">Nº persones: <span id="npersones"></span></div>

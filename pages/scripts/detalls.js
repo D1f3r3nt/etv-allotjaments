@@ -10,7 +10,6 @@ const nhabitacions = $('#nhabitacions');
 const tallotjament = $('#tallotjament');
 const tvacances = $('#tvacances');
 const categoria = $('#categoria');
-const imatge = $('#imatge');
 const descripcio = $('#descripcio');
 const carrer = $('#carrer');
 const numero_carrer = $('#numero');
@@ -19,6 +18,8 @@ const municipi = $('#municipi');
 const illa = $('#illa');
 const goBack = $('#go_back');
 const comentari = $('#columna_comentaris');
+const fotosCarousel = $('#fotos-carousel');
+const butonsCarousel = $('#buttons-carousel');
 let mapa;
 
 
@@ -39,13 +40,22 @@ $(() => {
         tallotjament.append(dato.tipus_allotjament.tipus_allotjament);
         tvacances.append(dato.tipus_vacances.tipus_vacances);
         categoria.append(dato.categoria.categoria);
-        imatge.attr("src", dato.fotos[0].url);
         descripcio.append(dato.descripcio);
         carrer.append(dato.carrer);
         numero_carrer.append(dato.numero);
         pis.append(dato.pisporta);
         municipi.append(dato.municipi.municipi);
         illa.append(dato.municipi.illa);
+
+        if (dato.fotos.length === 0) {
+            dato.fotos.push('https://loremflickr.com/300/225/house');
+        }
+
+        for (let i = 0; i < dato.fotos.length; i++) {
+            const foto = dato.fotos[i];
+            fotosCarousel.append(imgCarousel(foto, i));
+            butonsCarousel.append(botonCarousel(foto, i));  
+        }
 
         mapa = L.map('mapa').setView([dato.latitud, dato.longitud], 13);
 
@@ -54,7 +64,7 @@ $(() => {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(mapa);
 
-        var marker = L.marker([dato.latitud, dato.longitud]).addTo(mapa);
+        L.marker([dato.latitud, dato.longitud]).addTo(mapa);
 
         ipcRenderer.send('get_comentaris_id', dato.id);
 
@@ -66,7 +76,6 @@ $(() => {
         dato.forEach(element => {
             comentari.append(`<div id='comentaris' class='border-bottom border-dark border-2 mt-4'><div id='comentari' class="fs-5 text-start m-2 ps-1 ">Comentari: ` + element.comentari
             + `</div><div id=''valoracions' class="fs-5 text-start m-2 ps-1">Valoració: ` + element.valoracio + `</div></div>`);
-            //valoracio.append(`<div id='valoracio' class="fs-5 text-start mt-3 p-3 border border-dark border-2 rounded-3">` + element.valoracio + `</div>`);
             
         });
         
@@ -78,7 +87,6 @@ $(() => {
 });
 
 function clear() {
-    imatge.empty();
     nom.empty();
     nregistre.empty();
     npersones.empty();
@@ -97,4 +105,14 @@ function clear() {
     if (mapa) {
         mapa.remove();
     }
+}
+
+function imgCarousel(params, index) {
+    return `<div class="carousel-item ${(index === 0) ? 'active' : ''}">
+                <img src="${params.url}" class="d-block w-100" alt="Imagen de la casa"/>
+            </div>`;
+}
+
+function botonCarousel(params, index) {
+    return `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${index}" ${(index === 0) ? 'class="active"' : ''} aria-current="true" aria-label="Slide ${index + 1}"></button>`;
 }
