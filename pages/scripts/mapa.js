@@ -14,8 +14,12 @@ $(() => {
 
         response.map(value => {
             if (value.aprovat === 1){
-                L.marker([value.latitud, value.longitud]).addTo(map).bindPopup(value.nom);
+                L.marker([value.latitud, value.longitud]).addTo(map).bindPopup(`<h4 id="${value.id}" onclick="mostrar(this.id)">${value.nom}</h4>`);
             }
         });
     })
 });
+
+function mostrar(id) {
+    ipcRenderer.send('load_page_detalls', id);
+}

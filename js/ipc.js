@@ -1,4 +1,4 @@
-const { net, ipcMain, BrowserWindow, Menu } = require('electron');
+const { ipcMain, BrowserWindow, Menu } = require('electron');
 const { myMenuLogged } = require('../components/menu_logged');
 const { get, post, postWithToken, getWithToken } = require('./crud');
 const Store = require('electron-store');
@@ -26,6 +26,11 @@ ipcMain.on('close_window', (e, args) => {
     const login = BrowserWindow.fromWebContents(e.sender);
     login.close();
 });
+
+// ========================
+// GET user id
+// ========================
+ipcMain.on('get_user_id', (e, _) => e.sender.send('res_get_user_id', userId));
 
 // ========================
 // GET local storage
@@ -61,9 +66,7 @@ ipcMain.on('save_storage', (_, data) => {
 // ========================
 // DELETE local storage
 // ========================
-ipcMain.on('clear_storage', (y, x) => {
-    store.clear();
-});
+ipcMain.on('clear_storage', (y, x) => store.clear());
 
 // ========================
 // GET all Allotjaments
@@ -116,7 +119,6 @@ ipcMain.on('get_categories', (e, args) => {
 // GET Municipis
 // ========================
 ipcMain.on('get_municipis', (e, args) => {
-
     get('/api/municipis', (chunk) => {
         e.sender.send('res_get_municipis', JSON.parse(chunk));
     })
@@ -127,7 +129,6 @@ ipcMain.on('get_municipis', (e, args) => {
 // GET Comentaris Per Id
 // ========================
 ipcMain.on('get_comentaris_id', (e, args) => {
-
     get(`/api/comentaris/${args}`, (chunk) => {
         e.sender.send('res_get_comentaris_id', JSON.parse(chunk));
     });
@@ -137,9 +138,6 @@ ipcMain.on('get_comentaris_id', (e, args) => {
 // POST Login
 // ========================
 ipcMain.on('post_login', (e, args) => {
-
-    console.log(args)
-
     //Variables
     var body = JSON.stringify(args);
 
@@ -153,9 +151,6 @@ ipcMain.on('post_login', (e, args) => {
             token = 'Bearer ' + responseData.data.token;
             // Guardar Usuari
             userId = responseData.data.usuari.id;
-            // Enviar Info a la finestra principal
-            // win.webContents.send('res_post_login', responseData);
-
             //Canviar Menu
             Menu.setApplicationMenu(myMenuLogged(current_window));
         }
@@ -205,10 +200,7 @@ ipcMain.on('load_page_detalls', (e, id) => {
 // ========================
 // Cargar pagina principal
 // ========================
-ipcMain.on('load_home_page', () => {
-    current_window.loadFile('./pages/index.html')
-});
-
+ipcMain.on('load_home_page', () => current_window.loadFile('./pages/index.html'));
 
 module.exports = {
     logout,

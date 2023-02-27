@@ -1,4 +1,4 @@
-const { Grid, h } = require('gridjs');
+const { Grid, h, html } = require('gridjs');
 let $ = { jquery } = require('jquery');
 const { ipcRenderer } = require("electron");
 
@@ -28,6 +28,10 @@ $(() => {
 
 });
 
+function information(id) {
+    ipcRenderer.send('load_page_detalls', id);
+}
+
 function taula(params) {
     new Grid({
         columns: [
@@ -38,6 +42,12 @@ function taula(params) {
             "Dni",
             "Carrer",
             "Numero",
+            {
+                name: '',
+                formatter: (cell, row) => {
+                    return html(`<button id="${row.cells[0].data}" type="button" class="btn btn-info" onclick="information(this.id)"><i class="fa-solid fa-circle-info"></i></button>`);
+                },
+            },
             {
                 name: '',
                 formatter: (cell, row) => {

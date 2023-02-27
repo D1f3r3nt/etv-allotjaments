@@ -48,13 +48,15 @@ $(() => {
         illa.append(dato.municipi.illa);
 
         if (dato.fotos.length === 0) {
-            dato.fotos.push('https://loremflickr.com/300/225/house');
+            const foto = 'https://loremflickr.com/300/225/house';
+            fotosCarousel.append(imgCarousel(foto, 0));
+            butonsCarousel.append(botonCarousel(0));  
         }
 
         for (let i = 0; i < dato.fotos.length; i++) {
             const foto = dato.fotos[i];
-            fotosCarousel.append(imgCarousel(foto, i));
-            butonsCarousel.append(botonCarousel(foto, i));  
+            fotosCarousel.append(imgCarousel(foto.url, i));
+            butonsCarousel.append(botonCarousel(i));  
         }
 
         mapa = L.map('mapa').setView([dato.latitud, dato.longitud], 13);
@@ -82,7 +84,7 @@ $(() => {
     })
 
     goBack.on('click', () => {
-        ipcRenderer.send('load_home_page');
+        window.history.back();
     })
 });
 
@@ -107,12 +109,12 @@ function clear() {
     }
 }
 
-function imgCarousel(params, index) {
+function imgCarousel(foto, index) {
     return `<div class="carousel-item ${(index === 0) ? 'active' : ''}">
-                <img src="${params.url}" class="d-block w-100" alt="Imagen de la casa"/>
+                <img src="${foto}" class="d-block w-100" alt="Imagen de la casa"/>
             </div>`;
 }
 
-function botonCarousel(params, index) {
+function botonCarousel(index) {
     return `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${index}" ${(index === 0) ? 'class="active"' : ''} aria-current="true" aria-label="Slide ${index + 1}"></button>`;
 }

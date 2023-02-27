@@ -82,12 +82,12 @@ function postWithToken(endpoint, body, token, callback) {
         method: 'POST',
         protocol: hostProtocol,
         hostname: hostApi,
-        // port:'80',
         path: endpoint,
     });
 
     request.on('response', (response) => {
         data = "";
+        console.log(response);
         response.on('data', (chunk) => {
             data+=chunk;
         });

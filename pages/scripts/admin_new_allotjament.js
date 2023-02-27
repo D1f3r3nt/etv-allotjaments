@@ -16,18 +16,23 @@ const npersones = $('#npersones');
 const nllits = $('#nllits');
 const nhabitacions = $('#nhabitacions');
 const nbanys = $('#nbanys');
-const propietari = $('#propietari');
 const categoria = $('#categoria');
 const tallotjaments = $('#tallotjaments');
 const tvacances = $('#tvacances');
 
+let idUsuari;
+
 $(() => {
+    // Para coger usuario
+    ipcRenderer.send('get_user_id');
+
+    ipcRenderer.on('res_get_user_id', (e, id) => idUsuari = id);
+
     // Municipis
     ipcRenderer.send('get_municipis');
 
     ipcRenderer.on('res_get_municipis', (e, args) => {
         let municipis = args.data;
-        //
         municipis.forEach((e) => {
             municipio.append(`<option value="${e.id}">${e.municipi}, ${e.illa}</option>`);
         });
@@ -38,7 +43,6 @@ $(() => {
 
     ipcRenderer.on('res_get_tipus_allotjaments', (e, args) => {
         let tallotjament = args.data;
-        //
         tallotjament.forEach((e) => {
             tallotjaments.append(`<option value="${e.id}">${e.tipus_allotjament}</option>`);
         });
@@ -49,7 +53,6 @@ $(() => {
 
     ipcRenderer.on('res_get_tipus_vacances', (e, args) => {
         let vac = args.data;
-        //
         vac.forEach((e) => {
             tvacances.append(`<option value="${e.id}">${e.tipus_vacances}</option>`);
         });
@@ -60,7 +63,6 @@ $(() => {
 
     ipcRenderer.on('res_get_categories', (e, args) => {
         let cat = args.data;
-        //
         cat.forEach((e) => {
             categoria.append(`<option value="${e.id}">${e.categoria}</option>`);
         });
@@ -77,7 +79,7 @@ $(() => {
         var popLocation= e.latlng;
         latitude.val(popLocation.lat);
         longitud.val(popLocation.lng);
-        var popup = L.popup()
+        L.popup()
             .setLatLng(popLocation)
             .setContent("Nueva casa")
             .openOn(map);
@@ -100,11 +102,12 @@ $(() => {
             "municipi_id": municipio.val(),
             "tipus_allotjament_id": tallotjaments.val(),
             "tipus_vacances_id": tvacances.val(),
-            "propietari_id": propietari.val(),
+            "propietari_id": `${idUsuari ?? 1}`,
             "categoria_id": categoria.val(),
-            "longitud": longitud.val(),
-            "latitud": latitude.val()
+            "longitud": parseFloat(longitud.val()).toFixed(6),
+            "latitud": parseFloat(latitude.val()).toFixed(6)
         };
+
         console.log(data);
         ipcRenderer.send('post_allotjament', data);
 
