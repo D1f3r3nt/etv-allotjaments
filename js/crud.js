@@ -14,12 +14,12 @@ function get(endpoint, callback) {
     const request = net.request(valueRequest);
 
     request.on('response', (response) => {
-        data = "";
+        data = [];
         response.on('data', (chunk) => {
-            data+=chunk;
+            data.push(chunk);
         });
         response.on('end', () => {
-            callback(data);
+            callback(data.join(" "));
         });
     });
 
@@ -38,12 +38,12 @@ function post(endpoint, body, callback) {
     });
 
     request.on('response', (response) => {
-        data = "";
+        data = [];
         response.on('data', (chunk) => {
-            data+=chunk;
+            data.push(chunk);
         });
         response.on('end', () => {
-            callback(data);
+            callback(data.join(" "));
         });
     });
     request.setHeader('Content-Type', 'application/json');
@@ -61,12 +61,12 @@ function getWithToken(endpoint, body, token, callback) {
     });
 
     request.on('response', (response) => {
-        data = "";
+        data = [];
         response.on('data', (chunk) => {
-            data+=chunk;
+            data.push(chunk);
         });
         response.on('end', () => {
-            callback(data);
+            callback(data.join(" "));
         });
     });
 
@@ -86,13 +86,13 @@ function postWithToken(endpoint, body, token, callback) {
     });
 
     request.on('response', (response) => {
-        data = "";
+        data = [];
         console.log(response);
         response.on('data', (chunk) => {
-            data+=chunk;
+            data.push(chunk);
         });
         response.on('end', () => {
-            callback(data);
+            callback(data.join(" "));
         });
     });
 

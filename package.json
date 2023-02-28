@@ -26,6 +26,7 @@
     "electron-store": "^8.1.0",
     "gridjs": "^6.0.6",
     "jquery": "^3.6.3",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "sweetalert2": "^11.7.3"
   }
 }

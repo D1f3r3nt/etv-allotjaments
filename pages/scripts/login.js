@@ -1,5 +1,6 @@
 let $ = { jquery } = require('jquery');
 const { ipcRenderer } = require("electron");
+const Swal = require('sweetalert2');
 
 const cancel = $('#cancel');
 const send = $('#send');
@@ -46,7 +47,11 @@ cancel.on('click', () => {
 ipcRenderer.on('res_post_login', (_, data) => {
 
     if(data.status === "error"){
-        alert("Error al introduir les credencials")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Usuari o contraseña incorrecte'
+          })
     }else{
         ipcRenderer.send('close_window');
     }
