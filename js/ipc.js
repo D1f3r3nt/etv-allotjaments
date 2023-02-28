@@ -73,7 +73,9 @@ ipcMain.on('clear_storage', (y, x) => store.clear());
 // ========================
 ipcMain.on('get_allotjaments', (e, args) => {
     get('/api/allotjaments', (chunk) => {
-        e.sender.send('res_get_allotjaments', JSON.parse(chunk));
+        try {
+            e.sender.send('res_get_allotjaments', JSON.parse(chunk));
+        } catch(e) {}
     });
 });
 
@@ -82,7 +84,9 @@ ipcMain.on('get_allotjaments', (e, args) => {
 // ========================
 ipcMain.on('get_fotos', (e, args) => {
     get('/api/fotos', (chunk) => {
-        e.sender.send('res_get_fotos', JSON.parse(chunk))
+        try {
+            e.sender.send('res_get_fotos', JSON.parse(chunk))
+        } catch(e) {}
     });
 });
 
@@ -92,7 +96,9 @@ ipcMain.on('get_fotos', (e, args) => {
 // ========================
 ipcMain.on('get_tipus_allotjaments', (e, args) => {
     get('api/tipus_allotjaments', (chunk) => {
-        e.sender.send('res_get_tipus_allotjaments', JSON.parse(chunk))
+        try {
+            e.sender.send('res_get_tipus_allotjaments', JSON.parse(chunk))
+        } catch(e) {}
     });
 });
 
@@ -101,7 +107,9 @@ ipcMain.on('get_tipus_allotjaments', (e, args) => {
 // ========================
 ipcMain.on('get_tipus_vacances', (e, args) => {
     get('api/tipus_vacances', (chunk) => {
-        e.sender.send('res_get_tipus_vacances', JSON.parse(chunk))
+        try {
+            e.sender.send('res_get_tipus_vacances', JSON.parse(chunk))
+        } catch(e) {}
     });
 });
 
@@ -111,7 +119,9 @@ ipcMain.on('get_tipus_vacances', (e, args) => {
 // ========================
 ipcMain.on('get_categories', (e, args) => {
     get('api/categories', (chunk) => {
-        e.sender.send('res_get_categories', JSON.parse(chunk))
+        try { 
+            e.sender.send('res_get_categories', JSON.parse(chunk))
+        } catch(e) {}
     });
 });
 
@@ -120,7 +130,9 @@ ipcMain.on('get_categories', (e, args) => {
 // ========================
 ipcMain.on('get_municipis', (e, args) => {
     get('/api/municipis', (chunk) => {
-        e.sender.send('res_get_municipis', JSON.parse(chunk));
+        try { 
+            e.sender.send('res_get_municipis', JSON.parse(chunk));
+        } catch(e) {}
     })
 });
 
@@ -130,7 +142,9 @@ ipcMain.on('get_municipis', (e, args) => {
 // ========================
 ipcMain.on('get_comentaris_id', (e, args) => {
     get(`/api/comentaris/${args}`, (chunk) => {
-        e.sender.send('res_get_comentaris_id', JSON.parse(chunk));
+        try { 
+            e.sender.send('res_get_comentaris_id', JSON.parse(chunk));
+        } catch(e) {}
     });
 });
 
@@ -142,7 +156,9 @@ ipcMain.on('post_login', (e, args) => {
     var body = JSON.stringify(args);
 
     post('/api/login', body, (chunk) => {
-        responseData = JSON.parse(chunk);
+        try { 
+            responseData = JSON.parse(chunk);
+        } catch(e) {}
         e.sender.send('res_post_login', responseData);
 
         // Guardam Credencials si hi ha Login
@@ -166,7 +182,9 @@ ipcMain.on('post_allotjament', (e, args) => {
     console.log(body);
 
     postWithToken('/api/allotjaments', body, token,(chunk) => {
-        responseData = JSON.parse(chunk);
+        try {
+            responseData = JSON.parse(chunk);
+        } catch(e) {}
         console.log(responseData);
         e.sender.send('res_post_allotjament', responseData);
     });
@@ -178,7 +196,7 @@ ipcMain.on('post_allotjament', (e, args) => {
 function logout() {
     console.log("token at START: " + token);
     getWithToken('/api/logout', "", token, (chunk) => {
-        console.log(JSON.parse(chunk));
+        //console.log(JSON.parse(chunk));
     });
 
     // Buidar Variables
@@ -193,7 +211,9 @@ ipcMain.on('load_page_detalls', (e, id) => {
     current_window.loadFile('./pages/detalls.html');
 
     get(`/api/allotjaments/${id}`, (chunk) => {
+        try {
         e.sender.send('res_load_data', JSON.parse(chunk))
+        } catch(e) {}
     });
 });
 

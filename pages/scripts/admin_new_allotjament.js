@@ -87,7 +87,6 @@ $(() => {
 
     create.on('click', (e) => {
         e.preventDefault();
-        console.log('CLICK');
         const data = {
             "nom": nom.val(),
             "descripcio": descripcio.val(),
