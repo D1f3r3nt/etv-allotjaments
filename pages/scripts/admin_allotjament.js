@@ -53,7 +53,7 @@ function taula(params) {
                 formatter: (cell, row) => {
                     return h('button', {
                         className: 'btn btn-primary',
-                        onClick: () => alert(`Editing "${row.cells[0].data}" "${row.cells[1].data}"`)
+                        onClick: () => ipcRenderer.send('load_page_modify', row.cells[0].data)
                     }, 'Edit');
                 },
             },

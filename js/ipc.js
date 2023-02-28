@@ -1,6 +1,6 @@
 const { ipcMain, BrowserWindow, Menu } = require('electron');
 const { myMenuLogged } = require('../components/menu_logged');
-const { get, post, postWithToken, getWithToken } = require('./crud');
+const { get, post, postWithToken, getWithToken, putWithToken } = require('./crud');
 const Store = require('electron-store');
 const store = new Store();
 
@@ -179,7 +179,7 @@ ipcMain.on('post_login', (e, args) => {
 ipcMain.on('post_allotjament', (e, args) => {
     //Variables
     var body = JSON.stringify(args);
-    console.log(body);
+    console.log('POST' + body);
 
     postWithToken('/api/allotjaments', body, token,(chunk) => {
         try {
@@ -187,6 +187,23 @@ ipcMain.on('post_allotjament', (e, args) => {
         } catch(e) {}
         console.log(responseData);
         e.sender.send('res_post_allotjament', responseData);
+    });
+});
+
+// ========================
+// PUT Allotjament
+// ========================
+ipcMain.on('put_allotjament', (e, args) => {
+    //Variables
+    var body = JSON.stringify(args.data);
+    console.log('PUT' + body);
+
+    putWithToken(`/api/allotjaments/${args.id}`, body, token,(chunk) => {
+        try {
+            responseData = JSON.parse(chunk);
+        } catch(e) {}
+        console.log(responseData);
+        e.sender.send('res_put_allotjament', responseData);
     });
 });
 
@@ -212,7 +229,20 @@ ipcMain.on('load_page_detalls', (e, id) => {
 
     get(`/api/allotjaments/${id}`, (chunk) => {
         try {
-        e.sender.send('res_load_data', JSON.parse(chunk))
+            e.sender.send('res_load_data', JSON.parse(chunk))
+        } catch(e) {}
+    });
+});
+
+// =============================
+// Carga pagina de modificacion
+// =============================
+ipcMain.on('load_page_modify', (e, id) => {
+    current_window.loadFile('./pages/admin_new_allotjament.html');
+
+    get(`/api/allotjaments/${id}`, (chunk) => {
+        try {
+            e.sender.send('res_load_data', JSON.parse(chunk))
         } catch(e) {}
     });
 });
