@@ -2,6 +2,7 @@ let $ = { jquery } = require('jquery');
 const { ipcRenderer } = require("electron");
 
 const nom = $('#nom');
+const propietari = $('#propietari');
 const nregistre = $('#nregistre');
 const npersones = $('#npersones');
 const nbanys = $('#nbanys');
@@ -32,6 +33,7 @@ $(() => {
         let dato = args.data;
 
         nom.append(dato.nom);
+        propietari.append(dato.propietari.nom);
         nregistre.append(dato.nregistre);
         npersones.append(dato.npersones);
         nbanys.append(dato.nbanys);

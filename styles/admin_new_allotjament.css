@@ -1,3 +1,7 @@
+body {
+    background-color: #f8edeb;
+}
+
 #map {
     height: 100%;
     width: 100%;

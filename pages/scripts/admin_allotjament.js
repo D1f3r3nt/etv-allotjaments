@@ -58,6 +58,12 @@ function taula(params) {
                 },
             },
         ],
+        style: {
+            th: {
+                'background-color': '#99d98c',
+                'color': 'black',
+            }
+        },
         height: '65vh',
         data: params,
         search: true,

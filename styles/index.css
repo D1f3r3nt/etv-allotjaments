@@ -2,7 +2,15 @@ body {
     background-color: #f8edeb;
 }
 .card {
-    width: 18rem;
+    width: 20rem;
+}
+
+.imatge {
+    height: 20px;
+}
+
+ .titol {
+    background-color: #99d98c;
 }
 
 nav div {
@@ -29,4 +37,8 @@ nav div {
 
 .mxw-600 {
     max-width: 600px !important;
+}
+
+.filtrar {
+    background-color: #99d98c;
 }
