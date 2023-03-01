@@ -1,4 +1,4 @@
-const { ipcMain, BrowserWindow, Menu } = require('electron');
+const { ipcMain, BrowserWindow, Menu, net} = require('electron');
 const { myMenuLogged } = require('../components/menu_logged');
 const { get, post, postWithToken, getWithToken, putWithToken } = require('./crud');
 const Store = require('electron-store');
@@ -196,7 +196,6 @@ ipcMain.on('post_allotjament', (e, args) => {
 ipcMain.on('put_allotjament', (e, args) => {
     //Variables
     var body = JSON.stringify(args.data);
-    console.log('PUT' + body);
 
     putWithToken(`/api/allotjaments/${args.id}`, body, token,(chunk) => {
         try {

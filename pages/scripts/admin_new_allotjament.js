@@ -25,6 +25,10 @@ const map = L.map('map').setView([39.627137, 2.977492], 9);
 let idUsuari;
 let idPropietari = '-100'
 let modifing = false;
+let idAllotjament;
+let originalNom;
+let originalNumeroRegistre;
+
 
 let mun;
 let ta;
@@ -38,7 +42,6 @@ $(() => {
         create.empty();
         create.html('Modify');
         modifing = true;
-        console.log(value.data)
 
         idPropietari = value.data.propietari_id;
         nom.val(value.data.nom);
@@ -57,6 +60,10 @@ $(() => {
         cat = value.data.categoria_id;
         ta = value.data.tipus_allotjament_id;
         tv = value.data.tipus_vacances_id;
+
+        idAllotjament = value.data.id;
+        originalNom = value.data.nom;
+        originalNumeroRegistre = value.data.nregistre;
 
         // Mapa
         var popLocation= L.latLng(parseFloat(latitude.val()), parseFloat(longitud.val()));
@@ -138,7 +145,7 @@ $(() => {
         longitud.val(popLocation.lng);
         L.popup()
             .setLatLng(popLocation)
-            .setContent("Nueva casa")
+            .setContent("Ubicació")
             .openOn(map);
     });
 
@@ -175,28 +182,33 @@ $(() => {
             "latitud": parseFloat(latitude.val()).toFixed(6)
         };
 
-        console.log(data);
         
         if (modifing) {
-            const all = {
-                "id": idUsuari,
-                "data": data
+
+            if (nom.val()==originalNom && numeroRegistre.val()==originalNumeroRegistre){
+                snackError("Limitacions API: Canvi obligatori de nom del allotjament i numero de registre.")
+            } else {
+                const all = {
+                    "id": idAllotjament,
+                    "data": data
+                }
+
+                ipcRenderer.send('put_allotjament', all);
+
+                ipcRenderer.on('res_put_allotjament', (_, args) => {
+                    if (args.status === 'success') snackCorrect("Allotjament modificat");
+                    // else snackError(`ERROR: Nom repetit o NRegistre repetit`);
+                    else snackError(JSON.stringify(args.data))
+                });
             }
-
-            ipcRenderer.send('put_allotjament', all);
-
-            ipcRenderer.on('res_put_allotjament', (_, args) => {
-                if (args.status === 'success') snackCorrect("Allotjament modificat");
-                else snackError(`ERROR: Nom repetit o NRegistre repetit`);
-            });
-
         } else {
 
             ipcRenderer.send('post_allotjament', data);
 
             ipcRenderer.on('res_post_allotjament', (_, args) => {
                 if (args.status === 'success') snackCorrect("Allotjament creat");
-                else snackError(`ERROR: Nom repetit o NRegistre repetit`);
+               // else snackError(`ERROR: Nom repetit o NRegistre repetit`);
+                else snackError(JSON.stringify(args.data))
             });
         }
     });
