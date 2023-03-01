@@ -7,7 +7,8 @@
     <list default="true" id="0106c9bf-cefe-4c92-a978-2a39323e51d5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/ipc.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/ipc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/scripts/admin_new_allotjament.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/scripts/admin_new_allotjament.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/scripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/scripts/dashboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,18 +112,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/xavip/Documents/PAU/DVI/Electron/etv-allotjaments",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/xavip/Documents/PAU/DVI/Electron/etv-allotjaments&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -157,7 +158,9 @@
       <workItem from="1677248702628" duration="9584000" />
       <workItem from="1677259772440" duration="507000" />
       <workItem from="1677260298425" duration="3653000" />
-      <workItem from="1677662228678" duration="6708000" />
+      <workItem from="1677662228678" duration="21190000" />
+      <workItem from="1677692250313" duration="392000" />
+      <workItem from="1677692680534" duration="3456000" />
     </task>
     <servers />
   </component>

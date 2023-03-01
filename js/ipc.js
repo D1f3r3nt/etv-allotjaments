@@ -83,6 +83,17 @@ ipcMain.on('get_allotjaments', (e, args) => {
 });
 
 // ========================
+// GET all Reserves
+// ========================
+ipcMain.on('get_reserves', (e, args) => {
+    get('/api/reserves', (chunk) => {
+        try {
+            e.sender.send('res_get_reserves', JSON.parse(chunk));
+        } catch(e) {}
+    });
+});
+
+// ========================
 // GET all Fotos
 // ========================
 ipcMain.on('get_fotos', (e, args) => {
