@@ -12,6 +12,7 @@ function createWindow() {
             contextIsolation: false, // Para hacer que la ventana no sea unicamente cerrada
             nodeIntegration: true, //Para usar Node en la pagina
         },
+        icon: 'image/ETV.ico',
         title: 'ETV Allotjaments',
     });
 
