@@ -66,5 +66,45 @@ ipcRenderer.on('res_get_allotjaments', (e, args) => {
     }
     barChart = new Chart(ctx, dataChart);
   })();
+});
 
-})
+function change(id) {
+  // Style de los elementos del nav
+  let items = document.querySelectorAll('.nav-item');
+  items.forEach(i => i.classList.remove('active'))
+
+  document.querySelector(`#${id}`)
+          .classList
+          .add('active');
+
+  // Titulo
+  document.getElementById('nomDash').innerHTML = idPerName(id);
+
+  // Grafica
+  let grafics = document.querySelectorAll('#zona > canvas');
+  grafics.forEach(i => i.classList.add('hidden'))
+
+  document.querySelector(`#${idPerGrafic(id)}`)
+          .classList
+          .remove('hidden');
+}
+
+function idPerName(id) {
+  switch (id) {
+    case 'perPobles': return 'Per pobles';
+    case 'capacitat': return 'Capacitat';
+    case 'ocupacio': return 'Ocupacio';
+    case 'reserves': return 'Reserves';
+    default: return '';
+  }
+}
+
+function idPerGrafic(id) {
+  switch (id) {
+    case 'perPobles': return 'grafic1';
+    case 'capacitat': return 'grafic2';
+    case 'ocupacio': return 'grafic3';
+    case 'reserves': return 'grafic4';
+    default: return '';
+  }
+}

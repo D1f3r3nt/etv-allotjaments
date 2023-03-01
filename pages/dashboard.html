@@ -7,32 +7,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Renderizados CSS -->
     <link rel="stylesheet" href="../styles/dashboard.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
 
 </head>
 
 <body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block">
+                <div class="position-sticky pt-3 sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li id="perPobles" class="nav-item active" onclick="change(this.id)">
+                        <i class="fas fa-city"></i>&nbsp
+                        Per pobles
+                    </li>
+                    <li id="capacitat" class="nav-item" onclick="change(this.id)">
+                        <i class="fas fa-expand-arrows-alt"></i>&nbsp
+                        Capacitat
+                    </li>
+                    <li id="ocupacio" class="nav-item" onclick="change(this.id)">
+                        <i class="fa-solid fa-people-group"></i>&nbsp
+                        Ocupacio
+                    </li>
+                    <li id="reserves" class="nav-item" onclick="change(this.id)">
+                        <i class="fas fa-book"></i>&nbsp
+                        Reserves
+                    </li>
+                </ul>
+                </div>
+            </nav>
 
-    <nav class="navbar bg-black fixed-top">
-        <div class="container-fluid d-flex justify-content-center color-w">
-            Dashboard
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 id="nomDash" class="h2">Per pobles</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                </div>
+                <div id="zona">
+                    <canvas id='grafic1'></canvas>
+                    <canvas id='grafic2 hidden'>Aqui 2</canvas>
+                    <canvas id='grafic3 hidden'>Aqui 3</canvas>
+                    <canvas id='grafic4 hidden'>Aqui 4</canvas>
+                </div>
+            </main>
         </div>
-    </nav>
-
-    <div class="container mt-5">
-        <div id="zona">
-            
-            <canvas id='grafic1'></canvas>
-          </div>
-
     </div>
     <!-- Renderizados JS  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
         <script src="./scripts/dashboard.js"></script>
-
 
 </body>
 
