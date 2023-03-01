@@ -1,6 +1,9 @@
-const { ipcMain, BrowserWindow, Menu, net} = require('electron');
+const { ipcMain, BrowserWindow, Menu, net, dialog} = require('electron');
 const { myMenuLogged } = require('../components/menu_logged');
 const { get, post, postWithToken, getWithToken, putWithToken } = require('./crud');
+const path = require('path');
+const fs = require('fs');
+
 const Store = require('electron-store');
 const store = new Store();
 
@@ -250,6 +253,52 @@ ipcMain.on('load_page_modify', (e, id) => {
 // Cargar pagina principal
 // ========================
 ipcMain.on('load_home_page', () => current_window.loadFile('./pages/index.html'));
+
+// ========================
+// Llamada para hacer el PDF
+// ========================
+ipcMain.on('print_to_pdf', async function (event) {
+    const win = BrowserWindow.fromWebContents(event.sender);
+    const optionsPdf = {
+        marginsType: 2,
+        pageSize: 'A4',
+        printBackground: false,
+        printSelectionOnly: false,
+        landscape: false
+    }
+
+    let personalPath = await showSelectFolder(win);
+
+    // Nos encargamos de que haya seleccionado algo, para evitar posibles errores
+    if (personalPath) {
+        const pathPdf = path.join(personalPath, './estadistics.pdf');
+
+        win.webContents.printToPDF(optionsPdf).then(data => {
+            fs.writeFile(pathPdf, data, function (err) {
+                if (err) {
+                    event.sender.send('res_print_to_pdf', { status: false, message: err });
+                } else {
+                    event.sender.send('res_print_to_pdf', { status: true, message: undefined });
+                }
+            });
+        }).catch(error => {
+            event.sender.send('res_print_to_pdf', { status: false, message: error });
+        });
+    }
+
+    event.sender.send('res_print_to_pdf', { status: false, message: 'No seleccion' });
+});
+
+async function showSelectFolder(window) {
+    const { canceled, filePaths } = await dialog.showOpenDialog(window, {
+    properties: ['openDirectory']
+    })
+    if (canceled) {
+        return undefined;
+    } else {
+        return filePaths[0];
+    }
+}
 
 module.exports = {
     logout,

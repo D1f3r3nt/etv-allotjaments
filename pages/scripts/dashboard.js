@@ -1,6 +1,9 @@
 let $ = { jquery } = require('jquery');
 const { ipcRenderer } = require("electron");
 const { Chart } = require("chart.js/auto");
+const { snackCorrect, snackError } = require('../components/snackbars.js');
+
+const pdf = $('#print-pdf');
 
 // Variables
 let barChart
@@ -67,6 +70,18 @@ ipcRenderer.on('res_get_allotjaments', (e, args) => {
     barChart = new Chart(ctx, dataChart);
   })();
 });
+
+pdf.on('click', () => {
+  ipcRenderer.send('print_to_pdf');
+
+  ipcRenderer.on('res_print_to_pdf', (_, response) => {
+    if (response.status) {
+      snackCorrect('Arxiu creat');
+    } else {
+      snackError(response.message);
+    }
+  });
+})
 
 function change(id) {
   // Style de los elementos del nav

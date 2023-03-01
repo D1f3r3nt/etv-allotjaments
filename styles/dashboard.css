@@ -29,6 +29,17 @@ nav {
     font-weight: bold;
 }
 
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    #zona > canvas {
+        width: 700px !important;
+        height: 350px !important;
+    }
+}
+
 .hidden {
     display: none !important;
 }
