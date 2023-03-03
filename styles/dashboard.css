@@ -42,6 +42,13 @@ nav {
         width: 700px !important;
         height: 350px !important;
     }
+
+    #zona > canvas#grafic2, 
+    #zona > canvas#grafic3, 
+    #zona > canvas#grafic4 {
+        width: 700px !important;
+        height: 700px !important;
+    }
 }
 
 .hidden {
