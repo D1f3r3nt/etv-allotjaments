@@ -197,8 +197,7 @@ $(() => {
 
                 ipcRenderer.on('res_put_allotjament', (_, args) => {
                     if (args.status === 'success') snackCorrect("Allotjament modificat");
-                    // else snackError(`ERROR: Nom repetit o NRegistre repetit`);
-                    else snackError(JSON.stringify(args.data))
+                    else snackError(`ERROR: Canvis no realitzats`);
                 });
             }
         } else {
@@ -207,8 +206,7 @@ $(() => {
 
             ipcRenderer.on('res_post_allotjament', (_, args) => {
                 if (args.status === 'success') snackCorrect("Allotjament creat");
-               // else snackError(`ERROR: Nom repetit o NRegistre repetit`);
-                else snackError(JSON.stringify(args.data))
+                else snackError(`ERROR: Has d'emplenat tots els camps`);
             });
         }
     });

@@ -37,22 +37,22 @@ exports.myMenu = function (win) {
           click: () => createLogin(win)
         }
       ]
-    },
+    }
 
   // DEVELOPING MENU
   // Comentar abans d'entregar
-  {
-    label: 'Developer',
-    submenu: [
-      {
-        role: 'toggleDevTools',
-      },
-      {
-        label: 'Test Screen',
-        click: () => win.loadFile('./pages/test.html')
-      }
-    ]
-  }
+  // {
+  //   label: 'Developer',
+  //   submenu: [
+  //     {
+  //       role: 'toggleDevTools',
+  //     },
+  //     {
+  //       label: 'Test Screen',
+  //       click: () => win.loadFile('./pages/test.html')
+  //     }
+  //   ]
+  // }
   ];
 
   return Menu.buildFromTemplate(template);
