@@ -92,22 +92,22 @@ exports.myMenuLogged = function (win) {
   return Menu.buildFromTemplate(template);
 }
 
-function createLogin(win) {
-  const login = new BrowserWindow({
-    height: 500,
-    width: 500,
-    webPreferences: {
-      contextIsolation: false, // Para hacer que la ventana no sea unicamente cerrada
-      nodeIntegration: true, //Para usar Node en la pagina
-    },
-    title: 'Login on ETV Allotjaments',
-    parent: win,
-    modal: true,
-    resizable: false,
-    frame: false,
-  });
+// function createLogin(win) {
+//   const login = new BrowserWindow({
+//     height: 500,
+//     width: 500,
+//     webPreferences: {
+//       contextIsolation: false, // Para hacer que la ventana no sea unicamente cerrada
+//       nodeIntegration: true, //Para usar Node en la pagina
+//     },
+//     title: 'Login on ETV Allotjaments',
+//     parent: win,
+//     modal: true,
+//     resizable: false,
+//     frame: false,
+//   });
 
-  login.loadFile('./pages/login.html');
+//   login.loadFile('./pages/login.html');
 
-  return login;
-}
+//   return login;
+// }

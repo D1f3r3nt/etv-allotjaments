@@ -29,6 +29,10 @@ nav {
     font-weight: bold;
 }
 
+#grafic2, #grafic3, #grafic4 {
+    height: 60vh !important;
+}
+
 @media print {
     .no-print {
         display: none !important;

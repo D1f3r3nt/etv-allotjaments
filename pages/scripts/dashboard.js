@@ -18,7 +18,6 @@ let any;
 let reserves;
 
 $(() => {
-  // Municipis
   ipcRenderer.send('get_municipis');
 });
 
@@ -57,6 +56,18 @@ function change(id) {
 
   // Titulo
   document.getElementById('nomDash').innerHTML = idPerName(id);
+
+  // Forms
+  let forms = document.querySelectorAll('.forms');
+  forms.forEach(i =>{
+    i.classList.add('hidden');
+  })
+  if (id ==='capacitat'){
+    document.querySelector('#selectAllotjament').classList.remove('hidden');
+  } else if (id != 'perPobles') {
+    document.querySelector('#selectAllotjament').classList.remove('hidden');
+    document.querySelector('#selectAny').classList.remove('hidden');
+  }
 
   // Grafica
   let grafics = document.querySelectorAll('#zona > canvas');
@@ -105,8 +116,6 @@ ipcRenderer.on('res_get_allotjaments', (e, args) => {
   (async function () {
 
     const data = municipis;
-    // Array de Municipis per agafar
-    console.log(municipis)
 
     // Dades del Grafic
     var ctx = document.getElementById('grafic1');
@@ -130,9 +139,8 @@ ipcRenderer.on('res_get_allotjaments', (e, args) => {
     densitatChart = new Chart(ctx, dataChart);
   })();
 
-  // Altres operacions a partir d'aquest punt:
-  // Reclamar User ID
-  // Retornar ID propi
+
+  // Recuperar ID
   ipcRenderer.send('get_user_id');
 
 });
