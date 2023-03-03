@@ -71,6 +71,15 @@ function taula(params) {
         pagination: {
             limit: 15,
             summary: false
-        }
+        },
+        language: {
+            'search': {
+              'placeholder': 'Cercar...'
+            },
+            'pagination': {
+              'previous': 'Anterior',
+              'next': 'Següent'
+            }
+          }
     }).render(document.getElementById("wrapper"));
 }
