@@ -82,8 +82,8 @@ function idPerName(id) {
   switch (id) {
     case 'perPobles': return 'Per pobles';
     case 'capacitat': return 'Capacitat';
-    case 'ocupacio': return 'Ocupacio';
-    case 'reserves': return 'Reserves';
+    case 'ocupacio': return 'Reserves';
+    case 'reserves': return 'Ocupacio';
     default: return '';
   }
 }
